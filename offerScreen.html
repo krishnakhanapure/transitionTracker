@@ -154,27 +154,9 @@
         var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}}
 
         $(document).ready(function() {
-            offerDetails = JSON.parse(offerReleasedDetails);
             techTitleArr = JSON.parse(techTitleArrJSON);
-            interviewStatArr = JSON.parse(interviewStatJSON);
             
-            var data = "<tr>";
-            var data2 = '<option value="" selected="selected">(please select a Technology)</option>';
-            var data3 = "<tr>";
-
-            for (var key in offerDetails) {
-
-                data += "<td>"+offerDetails[key].candidateName+"</td><td>"+offerDetails[key].title+"</td><td>"+offerDetails[key].technology+"</td><td>"+offerDetails[key].doj+"</td><td>"+offerDetails[key].candidateExpn+"</td><td>"+Base64.decode(offerDetails[key].candidateCTC)+"</td><td>"+Base64.decode(offerDetails[key].candidatePCTC)+"</td><td>"+offerDetails[key].candidatehike+"</td><td>"+offerDetails[key].candidateNumber+"</td><td>"+offerDetails[key].candidateEmail+"</td>";
-
-                data += "</tr><tr>";
-            }
-
-            for (var key in interviewStatArr) {
-
-                data3 += "<td>"+interviewStatArr[key].technologyStat+"</td><td>"+interviewStatArr[key].titleStat+"</td><td>"+interviewStatArr[key].weekDate+"</td><td>"+interviewStatArr[key].source+"</td><td>"+interviewStatArr[key].testCount+"</td><td>"+interviewStatArr[key].techOneCount+"</td><td>"+interviewStatArr[key].techTwoCount+"</td><td>"+interviewStatArr[key].HRCount+"</td><td>"+interviewStatArr[key].stakeHolderCount+"</td>";
-
-                data3 += "</tr><tr>";
-            }
+            var data2 = '<option value="" selected="selected">please select a Technology</option>';
 
             for (var key2 in techTitleArr) {
 
@@ -182,32 +164,14 @@
 
             }
             
-            $('.interviewStatSummary').html(data3);
-            $('.offerLetterSummary').html(data);
             $('#technology').html(data2);
             $('#technologyStat').html(data2);
-
-            (function($) {
-                $.fn.goTo = function() {
-                    $('html, body').animate({
-                        scrollTop: $(this).offset().top + 'px'
-                    }, 'fast');
-                    return this; // for chaining...
-                }
-            })(jQuery);
             
         });
 
-        function openReport(tableName) {
-            $('.'+tableName).show().goTo();
-        }
-
-        function closePopUp2(e,tableName) {
-            $('.'+tableName).hide();
-        }
-
         function getTitle(techSelected) {
-            var data3 = '<option value="" selected="selected">(please select a level)</option>';
+            var data3 = '<option value="" selected="selected">please select a level</option>';
+            var data4 = '<option value="" selected="selected">please select the VP</option>';
 
             for (var key3 in techTitleArr) {
                 if(techTitleArr[key3]._id == techSelected) {
@@ -217,9 +181,21 @@
                 }
 
             }
+
+            for (var key5 in techTitleArr) {
+                if(techTitleArr[key5]._id == techSelected) {
+                    for(var key6 in techTitleArr[key5].canVP) {
+                        data4 += "<option value='"+techTitleArr[key5].canVP[key6]+"'>"+techTitleArr[key5].canVP[key6]+"</option>";
+                    }
+                }
+
+            }
             
             $('#title').html(data3);
             $('#titleStat').html(data3);
+
+            $('#canVPName').html(data4);
+
         }
 
         function changeDateFormat(e) {
@@ -262,7 +238,7 @@
 </head>
 <body>
 <div class="logo-banner">
-    <form class="form-horizontal" action="displaydashboard" method="post" enctype="multipart/form-data">
+    <form class="form-horizontal" action="mainDashboard" method="get" enctype="multipart/form-data">
         <input class="logo-text text-button" type="submit" name="" id="fetchCanVendorMap" value="Time Inc.">
     </form>
 </div>
@@ -322,6 +298,15 @@
                             </div>
                         </div>
 
+                        <!-- VP input input-->
+                        <div class="control-group">
+                            <label class="control-label">VP Name:</label>
+                            <div class="controls">
+                                <select required id="canVPName" name="canVPName" class="input-xlarge form-control" > 
+                                </select>
+                            </div>
+                        </div>
+
                         <!-- Years of Expn input-->
                         <div class="control-group">
                             <label class="control-label">Years of Experience:</label>
@@ -375,43 +360,26 @@
                                 class="input-xlarge form-control" />
                             </div>
                         </div>
+
+                        <!-- BackUp Check input-->
+                        <div class="control-group">
+                            <label class="control-label">Is it Backup Offer?:</label>
+                            <div class="controls">
+                                <input required class="btn" type="radio" name="backupOffer" id="backupOffery" value="Yes"> Yes
+                                <input required class="btn" type="radio" name="backupOffer" id="backupOffern" value="No"> No
+                            </div>
+                        </div>
                         
                         <!-- submit input-->
                         <div class="control-group">
                             <label class="control-label"></label>
                             <div class="controls">
                                 <input type="submit" name="" id="Submit" value="SUBMIT" onclick="encodeVals();"/>
-                                <input type="button" class="" name="" id="getReport" value="REPORT" onclick="openReport('offerLetterDetails');" />
                             </div>
                         </div>
 
                     </fieldset>
                 </form>
-            </div>
-
-            <div class="offerLetterDetails" style="display:none;">
-                <span class='closeButton glyphicon glyphicon-remove' onclick='closePopUp2(this,"offerLetterDetails");'></span>
-
-                <table class="table second-level-table table-striped">
-                    <thead>
-                        <tr style="background-color: #46AFF2; color: #fff; font-size: 14px;">
-                            <th>Candidate Name</th>
-                            <th>Title</th>
-                            <th>Technology</th>
-                            <th>DOJ</th>
-                            <th>Experience</th>
-                            <th>Candidate CTC</th>
-                            <th>Proposed CTC</th>
-                            <th>% Hike</th>
-                            <th>Contact.No</th>
-                            <th>Email ID</th>
-                        </tr>
-                    </thead>
-
-                    <tbody class="offerLetterSummary">
-                       
-                    </tbody>
-                </table>
             </div>
           
         </div>
@@ -511,7 +479,6 @@
                         <div class="control-group">
                             <div class="controls">
                                 <input type="submit" name="" id="Submit" value="SUBMIT" />&nbsp;
-                                <input type="button" class="" name="" id="getStatReport" value="Get Interview Stat" onclick="openReport('interviewStatDetails');" />
                             </div>
                             
                         </div>
@@ -520,29 +487,6 @@
                 </form>
             </div>
 
-            <div class="interviewStatDetails" style="display:none;">
-                <span class='closeButton glyphicon glyphicon-remove' onclick='closePopUp2(this,"interviewStatDetails");'></span>
-
-                <table class="table second-level-table table-striped">
-                    <thead>
-                        <tr style="background-color: #46AFF2; color: #fff; font-size: 14px;">
-                            <th>Technology</th>
-                            <th>Title</th>
-                            <th>Week When Interview Held</th>
-                            <th>Source</th>
-                            <th>Total Test cleared</th>
-                            <th>Total Tech1 Cleared</th>
-                            <th>Total Tech2 Cleared</th>
-                            <th>Total HR round Cleared</th>
-                            <th>Total skakeholder round cleared</th>
-                        </tr>
-                    </thead>
-
-                    <tbody class="interviewStatSummary">
-                       
-                    </tbody>
-                </table>
-            </div>
         </div>
         
     </div>

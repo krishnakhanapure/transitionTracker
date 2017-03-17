@@ -232,21 +232,6 @@
 
             $('#vendorStaff').html(vendorOptionsList);
         }
-
-        function getReport() {
-            $('.VendorMapReportBackFill').hide();
-            $('.VendorMapReport').show().goTo();     
-        }
-
-        function getBackFillReport() {
-            $('.VendorMapReport').hide();
-            $('.VendorMapReportBackFill').show().goTo();
-        }
-
-        function closePopUp(tableName) {
-            $('.'+tableName).hide();
-        }
-
     </script>
     
 </head>
@@ -254,7 +239,7 @@
 <body>
 
 <div class="logo-banner">
-    <form class="form-horizontal" action="displaydashboard" method="post" enctype="multipart/form-data">
+    <form class="form-horizontal" action="mainDashboard" method="get" enctype="multipart/form-data">
         <input class="logo-text text-button" type="submit" name="" id="fetchCanVendorMap" value="Time Inc.">
     </form>
 </div>
@@ -322,8 +307,6 @@
                 <div class="control-group">
                     <div class="controls">
                         <input type="submit" name="" id="MapVendor" value="MAP">
-                        <input type="button" name="" id="getMapVendorBackFill" value="Map Report" onclick="getBackFillReport();">
-                        <input type="button" name="" id="getMapVendor" value="Report for BackFill" onclick="getReport();">
                         
                     </div>
                 </div>
@@ -331,48 +314,6 @@
             </fieldset>
 
         </form>
-
-            <div class="VendorMapReport" style="display:none;">
-                <span class='closeButton glyphicon glyphicon-remove' onclick='closePopUp("VendorMapReport");'></span>
-
-                <table class="table second-level-table table-striped">
-                    <thead>
-                        <tr style="background-color: #46AFF2; color: #fff; font-size: 14px;">
-                            <th>Candidate Name</th>
-                            <th>Candidate Technology</th>
-                            <th>Candidate Title</th>
-                            <th>Candidate DOJ</th>
-                            <th>Vendor Staff</th>
-                            <th>VP Name</th>
-                        </tr>
-                    </thead>
-
-                    <tbody class="CanVendorMapSummary">
-                       
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="VendorMapReportBackFill" style="display:none;">
-                <span class='closeButton glyphicon glyphicon-remove' onclick='closePopUp("VendorMapReportBackFill");'></span>
-
-                <table class="table second-level-table table-striped">
-                    <thead>
-                        <tr style="background-color: #46AFF2; color: #fff; font-size: 14px;">
-                            <th>Candidate Name</th>
-                            <th>Candidate Technology</th>
-                            <th>Candidate Title</th>
-                            <th>Candidate DOJ</th>
-                            <th>Vendor Staff</th>
-                            <th>VP Name</th>
-                        </tr>
-                    </thead>
-
-                    <tbody class="CanVendorMapBackFillSummary">
-                       
-                    </tbody>
-                </table>
-            </div>
     </div>
 </div>
 

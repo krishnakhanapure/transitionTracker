@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
+    <title>Admin Settings</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <style type="text/css">
+
+        #addSkillsContainer {
+                margin: 10px 0px;
+        }
+
+        .newSkill {
+            margin-right: 5px;
+            width: 20%;
+        }
+
+        .newSkillPriority {
+            width: 12%;
+        }
+
+        .NScontainer {
+            margin-bottom: 8px;
+        }
+
+        .container {
+            margin-top: 3%;
+        }
+
+        input[type="submit"], input[type="button"]{
+            background-color: #2980B9;
+            border: #2980B9;
+            color: #fff;
+            text-shadow: none;
+            padding: 9px;
+        }
+
+        input[type="text"],input[type="number"],input[type="email"],input[type="date"], select {
+            height: 40px !important;
+        }
+
+        .form-control {
+            width: 80%;
+        }
+
+        .closeButton {
+            padding-left: 7px;
+        }
+
+        .control-label {
+            width: 29% !important;
+            margin-right: 25px;
+        }
+
+        .controls {
+            margin-left: 31% !important;
+        }
+
+        .closeButton {
+            left: 97%;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+
+        @font-face {
+            font-family: "timeFont";
+            src: url(img/Horsham-Serial-Bold 2.ttf) format("truetype");
+        }
+
+        .logo-text { 
+            font-family: "timeFont";
+        }
+
+        h3 {
+            padding: 10px;
+            text-align: center;
+            margin: auto;
+            background-color: #2980B9;
+            color: #fff;
+            padding: 26px;
+            margin-bottom: 30px;
+        }
+
+        .form-content {
+            background-color: #fff;
+            margin: auto;
+            width: 70%;
+            -webkit-box-shadow: 10px 10px 19px -5px rgba(0,0,0,1);
+            -moz-box-shadow: 10px 10px 19px -5px rgba(0,0,0,1);
+            box-shadow: 10px 10px 19px -5px rgba(0,0,0,1);
+            margin-top: 40px;
+            border: 1px solid #e9e9e9;
+        }
+
+        body {
+            background-color: #ffffff;
+        }
+
+        .logo-banner {
+            height: 121px;
+            background-color: #FCFEFF;
+            -webkit-box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+            box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+        }
+
+        .logo-text {
+            display: inline-block;
+            font-size: 59px;
+            padding: 20px 25px;
+            font-weight: bold;
+            color: #25A7DD;
+        }
+
+        .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+            color: #fff !important;
+            cursor: default;
+            background-color: #16A085 !important;
+            border: 1px solid #16A085 !important;
+            border-bottom-color: transparent;
+            border-radius: 0px;
+        }
+
+        .nav-tabs {
+            border-bottom: 2px solid #16A085 !important;
+        }
+
+        a {
+            color: #2C3E50;
+        }
+
+        input.text-button {
+            background-color: #fff;
+            color: #25A7DD;
+            height: auto;
+            padding-left: 15px;
+            outline: none;
+        }
+
+        th {
+            font-size: 13px;
+            font-weight: normal;
+        }
+
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="logo-banner">
+    <form class="form-horizontal" action="mainDashboard" method="get" enctype="multipart/form-data">
+        <input class="logo-text text-button" type="submit" name="" id="fetchCanVendorMap" value="Time Inc.">
+    </form>
+</div>
+
+<div class="container">
+
+  <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home">Add Configuration Details</a></li>
+        <li><a data-toggle="tab" href="#menu1">Add Users</a></li>
+  </ul>
+
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+
+            <div>
+
+                 <form class="form-horizontal" action="updateConfig" method="post" enctype="multipart/form-data">
+                    <fieldset class="form-content">
+                        <!-- Address form -->
+                 
+                        <h3>Please Enter Additional Configuration Details that needs to be Displayed</h3>
+
+                        <!-- Title  input-->
+                        <div class="control-group">
+                            
+                            <label class="control-label">Add Title:</label>
+                            <div class="controls">
+                                <input id="titleConfig" name="titleConfig" type="text" placeholder="Add New Title"
+                                class="input-xlarge form-control" />
+                                 <p><b>Please add comma seperated Values</b></p>
+
+                            </div>
+                        </div>
+
+                        <!-- Manager input-->
+                        <div class="control-group">
+                            <label class="control-label">Add NY Manager:</label>
+                            <div class="controls">
+                                <input id="managerConfig" name="managerConfig" type="text" placeholder="NY Manager"
+                                class="input-xlarge form-control" />
+                            </div>
+                        </div>
+
+                        <!-- Candidate Name input-->
+                        <div class="control-group">
+                            <label class="control-label">Add Technology:</label>
+                            <div class="controls">
+                                <input id="technologyConfig" name="technologyConfig" type="text" placeholder="Technology"
+                                class="input-xlarge form-control" />
+                            </div>
+                        </div>
+
+                         <!-- Availability Name input-->
+                        <div class="control-group">
+                            <label class="control-label">Add Availability:</label>
+                            <div class="controls">
+                                <input id="availConfig" name="availConfig" type="text" placeholder="Availability"
+                                class="input-xlarge form-control" />
+                            </div>
+                        </div>
+
+                        <!-- Vendor Name input-->
+                        <div class="control-group">
+                            <label class="control-label">Add Vendor:</label>
+                            <div class="controls">
+                                <input id="vendorConfig" name="vendorConfig" type="text" placeholder="Vendor Name"
+                                class="input-xlarge form-control" />
+                            </div>
+                        </div>
+
+                        <!-- offshore Manager input-->
+                        <div class="control-group">
+                            <label class="control-label">Add Offshore Manager:</label>
+                            <div class="controls">
+                                <input id="offMgrConfig" name="offMgrConfig" type="text" placeholder="Offshore Manager"
+                                class="input-xlarge form-control" />
+                            </div>
+                        </div>
+
+                        <!-- submit input-->
+                        <div class="control-group">
+                            <label class="control-label"></label>
+                            <div class="controls">
+                                <input type="submit" name="" id="Submit" value="SUBMIT" />
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+          
+        </div>
+        <div id="menu1" class="tab-pane fade">
+                <div>
+
+                 <form class="form-horizontal" action="updateUser" method="post" enctype="multipart/form-data">
+                    <fieldset class="form-content">
+                        <!-- Address form -->
+                 
+                        <h3>Please Add Details of New User:</h3>
+
+                        <!-- Title  input-->
+                        <div class="control-group">
+                            <label class="control-label">Add User Name:</label>
+                            <div class="controls">
+                                <input required id="userName" name="name" type="text" placeholder="User Name"
+                                class="input-xlarge form-control" />
+                            </div>
+                        </div>
+
+                        <!-- Manager input-->
+                        <div class="control-group">
+                            <label class="control-label">Add User Role:</label>
+                            <div class="controls">
+                                <select required id="userRole" name="role" class="input-xlarge form-control">
+                                      <option value="">Please Select a Role</option>
+                                      <option value="superadmin">Super Admin</option>
+                                      <option value="admin">Admin</option>
+                                      <option value="hr">HR</option>
+                                      <option value="user">User</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Candidate Name input-->
+                        <div class="control-group">
+                            <label class="control-label">Add User Email:</label>
+                            <div class="controls">
+                                <input required id="userEmail" name="email" type="email" placeholder="User Email"
+                                class="input-xlarge form-control" />
+                            </div>
+                        </div>
+
+                        <!-- submit input-->
+                        <div class="control-group">
+                            <label class="control-label"></label>
+                            <div class="controls">
+                                <input type="submit" name="" id="Submit" value="SUBMIT" />
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+
+        </div>
+        
+    </div>
+
+</div>
+<script type="text/javascript">
+    
+</script>
+</body>
+</html>

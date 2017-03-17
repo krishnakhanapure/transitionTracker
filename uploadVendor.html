@@ -165,21 +165,6 @@
         var configoffshoreManager = '<option value="" selected="selected">please select a offshore Manager</option>';
 
             $(document).ready(function() {
-                    venStaffDataJSONArr = JSON.parse(venStaffDataJSON);
-                    
-                    
-                    var data = "<tr>";
-                    
-
-                    for (var key in venStaffDataJSONArr) {
-
-                        data += "<td>"+venStaffDataJSONArr[key].staffName+"</td><td>"+venStaffDataJSONArr[key].technology+"</td><td>"+venStaffDataJSONArr[key].vendorName+"</td><td>"+venStaffDataJSONArr[key].VpName+"</td>";
-
-                        data += "</tr><tr>";
-                    }
-
-                    $('.VendorStaffSummary').html(data);
-
 
                     for (var key2 in getConfigData.technology) {
                         configTechnology += "<option value='"+getConfigData.technology[key2]+"'>"+getConfigData.technology[key2]+"</option>";
@@ -240,45 +225,16 @@
                     }
 
                     $('#VpName').html(managerList);
-
-
-                    for (var key2 in mapReportListJSON) {
-
-                        if(mapReportListJSON[key2].backfillPosition == "Yes") {
-
-                            data += "<td>"+mapReportListJSON[key2].candidateList+"</td><td>"+mapReportListJSON[key2].candidateTechnology+"</td><td>"+mapReportListJSON[key2].candidateTitle+"</td><td>"+mapReportListJSON[key2].candidateDOJ+"</td><td>"+mapReportListJSON[key2].vendorStaff+"</td><td>"+mapReportListJSON[key2].VpName+"</td><td>"+mapReportListJSON[key2].offshoreMgr+"</td>";
-
-                            data += "</tr><tr>";
-
-                        }else {
-
-                            data2 += "<td>"+mapReportListJSON[key2].candidateList+"</td><td>"+mapReportListJSON[key2].candidateTechnology+"</td><td>"+mapReportListJSON[key2].candidateTitle+"</td><td>"+mapReportListJSON[key2].candidateDOJ+"</td><td>"+mapReportListJSON[key2].vendorStaff+"</td><td>"+mapReportListJSON[key2].VpName+"</td><td>"+mapReportListJSON[key2].offshoreMgr+"</td>";
-
-                            data2 += "</tr><tr>";
-
-                        }
-                    }
-                    $('.CanVendorMapSummary').html(data);
-                    $('.CanVendorMapBackFillSummary').html(data2);
-
-                    (function($) {
-                        $.fn.goTo = function() {
-                            $('html, body').animate({
-                                scrollTop: $(this).offset().top + 'px'
-                            }, 'fast');
-                            return this; // for chaining...
-                        }
-                    })(jQuery);
                         
             });
 
-            function generateReport() {
-                $('.VendorStaffReport').show().goTo();
-            }
+            // function generateReport() {
+            //     $('.VendorStaffReport').show().goTo();
+            // }
 
-            function closePopUpVendor() {
-                $('.VendorStaffReport').hide();
-            }
+            // function closePopUpVendor() {
+            //     $('.VendorStaffReport').hide();
+            // }
 
             function populateCanDetails() {
                 for (var key in jsonToParse) {
@@ -300,6 +256,7 @@
 
             function populateVendor(managerSelected) {
                 vendorjsonToParse = JSON.parse(vendorJSONData);
+                
                 var vendorOptionsList = '<option value="" selected="selected">please select a Vendor Staff</option>';
                 var checkMappedStaff = false;
 
@@ -344,7 +301,7 @@
 </head>
 <body>
 <div class="logo-banner">
-    <form class="form-horizontal" action="displaydashboard" method="post" enctype="multipart/form-data">
+    <form class="form-horizontal" action="mainDashboard" method="get" enctype="multipart/form-data">
         <input class="logo-text text-button" type="submit" name="" id="fetchCanVendorMap" value="Time Inc.">
     </form>
 </div>
@@ -411,58 +368,12 @@
                         <div class="control-group">
                             <div class="controls">
                                 <input type="submit" name="" id="Submit" value="SUBMIT">
-                                <input type="button" name="" id="getReport" value="Get Report" onclick="generateReport();">
                             </div>
                         </div>
 
                     </fieldset>
                 </form>
-
-                <div class="VendorStaffReport" style="display:none;">
-                    <span class='closeButton glyphicon glyphicon-remove' onclick='closePopUpVendor();'></span>
-
-                    <table class="table second-level-table table-striped">
-                        <thead>
-                            <tr style="background-color: #46AFF2; color: #fff; font-size: 14px;">
-                                <th>Staff Name</th>
-                                <th>Technology</th>
-                                <th>Vendor Name</th>
-                                <th>VP Name</th>
-                            </tr>
-                        </thead>
-
-                        <tbody class="VendorStaffSummary">
-                           
-                        </tbody>
-                    </table>
-                </div>
             </div>
-
-            <!-- <div class="offerLetterDetails" style="display:none;">
-                <span class='closeButton glyphicon glyphicon-remove' onclick='closePopUp2(this,"offerLetterDetails");'></span>
-
-                <table class="table second-level-table table-striped">
-                    <thead>
-                        <tr style="background-color: #46AFF2; color: #fff; font-size: 14px;">
-                            <th>Candidate Name</th>
-                            <th>Title</th>
-                            <th>Technology</th>
-                            <th>DOJ</th>
-                            <th>Offer Accepted</th>
-                            <th>Experience</th>
-                            <th>Candidate CTC</th>
-                            <th>Proposed CTC</th>
-                            <th>% Hike</th>
-                            <th>Contact.No</th>
-                            <th>Email ID</th>
-                        </tr>
-                    </thead>
-
-                    <tbody class="offerLetterSummary">
-                       
-                    </tbody>
-                </table>
-            </div> -->
           
         </div>
         <div id="menu1" class="tab-pane fade">
@@ -538,8 +449,6 @@
                 <div class="control-group">
                     <div class="controls">
                         <input type="submit" name="" id="MapVendor" value="MAP">
-                        <input type="button" name="" id="getMapVendorBackFill" value="Map Report" onclick="getBackFillReport();">
-                        <input type="button" name="" id="getMapVendor" value="Report for BackFill" onclick="getReport();">
                         
                     </div>
                 </div>
@@ -547,52 +456,8 @@
             </fieldset>
 
         </form>
-
-            <div class="VendorMapReport" style="display:none;">
-                <span class='closeButton glyphicon glyphicon-remove' onclick='closePopUp("VendorMapReport");'></span>
-
-                <table class="table second-level-table table-striped">
-                    <thead>
-                        <tr style="background-color: #46AFF2; color: #fff; font-size: 14px;">
-                            <th>Candidate Name</th>
-                            <th>Candidate Technology</th>
-                            <th>Candidate Title</th>
-                            <th>Candidate DOJ</th>
-                            <th>Vendor Staff</th>
-                            <th>VP Name</th>
-                            <th>Offshore Manager</th>
-                        </tr>
-                    </thead>
-
-                    <tbody class="CanVendorMapSummary">
-                       
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="VendorMapReportBackFill" style="display:none;">
-                <span class='closeButton glyphicon glyphicon-remove' onclick='closePopUp("VendorMapReportBackFill");'></span>
-
-                <table class="table second-level-table table-striped">
-                    <thead>
-                        <tr style="background-color: #46AFF2; color: #fff; font-size: 14px;">
-                            <th>Candidate Name</th>
-                            <th>Candidate Technology</th>
-                            <th>Candidate Title</th>
-                            <th>Candidate DOJ</th>
-                            <th>Vendor Staff</th>
-                            <th>VP Name</th>
-                            <th>Offshore Manager</th>
-                        </tr>
-                    </thead>
-
-                    <tbody class="CanVendorMapBackFillSummary">
-                       
-                    </tbody>
-                </table>
-            </div>
                  
-                </div>
+        </div>
 
         </div>
     </div>

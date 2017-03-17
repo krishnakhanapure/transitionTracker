@@ -122,7 +122,7 @@
 <body>
 
 <div class="logo-banner">
-    <form class="form-horizontal" action="displaydashboard" method="post" enctype="multipart/form-data">
+    <form class="form-horizontal" action="mainDashboard" method="get" enctype="multipart/form-data">
         <input class="logo-text text-button" type="submit" name="" id="fetchCanVendorMap" value="Time Inc.">
     </form>
 </div>
@@ -130,6 +130,8 @@
 <div class="container">
     <div class="row">
          <form class="form-horizontal" action="sendOPDetails" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="skillset" value="" />
+
             <fieldset class="form-content">
                 <!-- Address form -->
          
@@ -222,93 +224,86 @@
                 <div class="control-group">
                     <div class="controls">
                         <input type="submit" name="" id="Submit" value="SUBMIT" onclick ="addValues();">
-                        <input type="button" name="" id="getReport" value="REPORT" onclick ="generateReport();">
                     </div>
                 </div>
 
             </fieldset>
         </form>
 
-        <div class="openPositionsReport" style="display:none;">
-                <span class='closeButton glyphicon glyphicon-remove' onclick='closePopUp(this,"openPositionsReport");'></span>
-
-                <table class="table second-level-table table-striped">
-                    <thead>
-                        <tr style="background-color: #46AFF2; color: #fff; font-size: 14px;">
-                            <th>Technology</th>
-                            <th>Title</th>
-                            <th>NY Manager</th>
-                            <th>Job Description</th>
-                            <th>Open Positions</th>
-                            <th>Availability</th>
-                            <th>Work Day</th>
-                            <th>Green House</th>
-                        </tr>
-                    </thead>
-
-                    <tbody class="openPositionSummary">
-                       
-                    </tbody>
-                </table>
-            </div>
+        
     </div>
 </div>
 <script type="text/javascript">
     var getConfigData = JSON.parse(configJSON);
 
     $(document).ready(function(){
-        var data = "<tr>";
+        
         var configAvailability = '<option value="" selected="selected">please enter the availability</option>';
+
         var configTechnology = '<option value="" selected="selected">please select a Technology</option>';
+
         var configTitle = '<option value="" selected="selected">please select a level</option>';
+
         var configManager = '<option value="" selected="selected">please select a Name</option>';
 
-        for (var key2 in getConfigData.availability) {
-            configAvailability += "<option value='"+getConfigData.availability[key2]+"'>"+getConfigData.availability[key2]+"</option>";
+        if(getConfigData[0].availability != undefined) {
+            var availArr = getConfigData[0].availability.split(',');
+
+            for (var key2 in availArr) {
+                configAvailability += "<option value='"+availArr[key2]+"'>"+availArr[key2]+"</option>";
+            }
+            $('#availability').html(configAvailability);
+
+        }else {
+            $('#availability').html("<option>No Values Available</option>");
         }
-        $('#availability').html(configAvailability);
 
 
+        if(getConfigData[0].technology != undefined) {
+            var techArr = getConfigData[0].technology.split(',');
 
-        for (var key3 in getConfigData.technology) {
-            configTechnology += "<option value='"+getConfigData.technology[key3]+"'>"+getConfigData.technology[key3]+"</option>";
+            for (var key3 in techArr) {
+                configTechnology += "<option value='"+techArr[key3]+"'>"+techArr[key3]+"</option>";
+            }
+            $('#technology').html(configTechnology);
+
+        }else {
+            $('#availability').html("<option>No Values Available</option>");
         }
-        $('#technology').html(configTechnology);
 
 
-        for (var key4 in getConfigData.manager) {
-            configManager += "<option value='"+getConfigData.manager[key4]+"'>"+getConfigData.manager[key4]+"</option>";
+        if(getConfigData[0].manager != undefined) {
+            var managerArr = getConfigData[0].manager.split(',');
+            
+            for (var key3 in managerArr) {
+                configManager += "<option value='"+managerArr[key3]+"'>"+managerArr[key3]+"</option>";
+            }
+            $('#technology').html(configManager);
+
+        }else {
+            $('#availability').html("<option>No Values Available</option>");
         }
-        $('#NYMgr').html(configManager);
 
 
-        for (var key5 in getConfigData.title) {
-            configTitle += "<option value='"+getConfigData.title[key5]+"'>"+getConfigData.title[key5]+"</option>";
+        if(getConfigData[0].title != undefined) {
+            var titleArr = getConfigData[0].title.split(',');
+            
+            for (var key3 in titleArr) {
+                configTitle += "<option value='"+titleArr[key3]+"'>"+titleArr[key3]+"</option>";
+            }
+            $('#technology').html(configTitle);
+
+        }else {
+            $('#availability').html("<option>No Values Available</option>");
         }
-        $('#title').html(configTitle);
+
 
         $('#addSkillsButton').on('click', function() {
+            
             $("#addSkillsContainer").append('<div class="NScontainer"><input type="text" class="newSkill input-xlarge" value="" /><select class="newSkillPriority" class="input-xlarge"><option value="" selected="selected">priority</option><option value="M">Mandatory</option><option value="N">Not Mandatory</option></select><span class="closeButtonSkill glyphicon glyphicon-remove" onclick="closePopUpSkill(this);"></span></div>');
         });
 
-        (function($) {
-            $.fn.goTo = function() {
-                $('html, body').animate({
-                    scrollTop: $(this).offset().top + 'px'
-                }, 'fast');
-                return this; // for chaining...
-            }
-        })(jQuery);
-
-        var openPositionsArr = JSON.parse(openPositionsJSON);
-
-        for (var key in openPositionsArr) {
-
-            data += "<td>"+openPositionsArr[key].technology+"</td><td>"+openPositionsArr[key].title+"</td><td>"+openPositionsArr[key].NYMgr+"</td><td>"+openPositionsArr[key].jobDesc+"</td><td>"+openPositionsArr[key].positionCheck+"</td><td>"+openPositionsArr[key].availability+"</td><td>"+openPositionsArr[key].workday+"</td><td>"+openPositionsArr[key].greenhouse+"</td>";
-
-            data += "</tr><tr>";
-        }
-        $('.openPositionSummary').html(data);
+        
     });
 
     function addValues() {
@@ -326,23 +321,23 @@
        var JD = $('#jobDesc').val().replace(/\n/g, ' ');
        var WD = $('#workday').val().replace(/\n/g, ' ');
        var GH = $('#greenhouse').val().replace(/\n/g, ' ');
-       
+
        $('#jobDesc').val(JD).attr('value',JD);
        $('#workday').val(WD).attr('value',WD);
        $('#greenhouse').val(GH).attr('value',GH);
     }
 
-    function closePopUp(e) {
-        $(e).parents('.openPositionsReport').hide();
-    }
+    // function closePopUp(e) {
+    //     $(e).parents('.openPositionsReport').hide();
+    // }
 
-    function closePopUpSkill(e) {
-        $(e).parents('.NScontainer').hide();
-    }
+    // function closePopUpSkill(e) {
+    //     $(e).parents('.NScontainer').hide();
+    // }
 
-    function generateReport() {
-        $('.openPositionsReport').show().goTo();
-    }
+    // function generateReport() {
+    //     $('.openPositionsReport').show().goTo();
+    // }
 
 </script>
 </body>

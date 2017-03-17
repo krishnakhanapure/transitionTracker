@@ -18,6 +18,7 @@
     "http": "0.0.0",
     "metaget": "^1.0.3",
     "mongodb": "^2.2.23",
+    "mongoose": "^4.9.0",
     "passport": "^0.3.2",
     "passport-saml": "^0.15.0",
     "request": "^2.79.0",

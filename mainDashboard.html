@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
-    <title>Login Form</title>
+    <title>Dashboard</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -26,9 +26,9 @@
             font-size: 15px;
         }
 
-        .totalSummary .totalPositions, .totalSummary .filledPositions, .totalSummary .remainingPositions {
+        .totalSummary .totalPositions, .totalSummary .filledPositions, .totalSummary .remainingPositions, .backUpPositions {
             font-weight: bold;
-            font-size: 47px;
+            font-size: 47px !important;
         }
 
         .data-summary-table {
@@ -36,6 +36,7 @@
             border-left: 1px solid #ddd;
             font-weight: bold;
             color: #6B7175;
+            border-collapse: inherit;
         }
 
         .data-summary-table th, .data-summary-table td {
@@ -173,6 +174,10 @@
             background-color: #F0AD4E;
         }
 
+        .orangeBox {
+            background-color: #FA7532;
+        }
+
         .headingText {
             margin: 0px 0px 21px 0px;
         }
@@ -210,15 +215,45 @@
             outline: none;
         }
 
+        .session-details {
+            float: right;
+            font-weight: bold;
+            padding-right: 5%;
+            padding-top: 1.6%;
+            font-size: 19px;
+        }
+
+        .glyphicon-off {
+            top: 2px;
+            cursor: pointer;
+        }
+
+
+        .role-admin .hide-role-admin {display: none}
+        .role-hr .hide-role-hr {display: none}
+        .role-user .hide-role-user {display: none}
+
     </style>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 
     <script type="text/javascript">
+
         $(document).ready(function() {
-            $('.totalPositions').html(totalOpenPositions);
-            $('.filledPositions').html(totalCountDisplay);
-            var remainingSlots = parseInt(totalOpenPositions-totalCountDisplay);
+            userInfo = JSON.parse(userDetails);
+            var userOpenPositions = 0;
+
+            var userRole = 'role-'+userInfo[0].role;
+            $('body').addClass(userRole);
+
+            if(userInfo[0].role != 'user') {
+                $('.totalPositions').html(totalOpenPositions);
+                $('.filledPositions').html(totalCountDisplay);
+                var remainingSlots = parseInt(totalOpenPositions-totalCountDisplay);
+
+            }else {
+
+            }
 
             if(remainingSlots <= 0 ) {
                 $('.remainingPositions').html(0);
@@ -234,15 +269,15 @@
             secLevelDataJSON = JSON.parse(secLevelData);
             OfferedNumber = JSON.parse(totalPositionsOffered);
 
-            var tableRow = "<tr>";
+            var tableRow = "<tr style='display: none;'>";
             var firstOverlay = "";
 
             for (var key in tableJSON) {
               if (tableJSON.hasOwnProperty(key)) {
                 var techSel = JSON.stringify(tableJSON[key]._id);
-                tableRow += '<td><a class="technologyName">'+tableJSON[key]._id+'</a></td><td>'+tableJSON[key].positionCheckCount+'</td>';
+                tableRow += '<td for="'+tableJSON[key].manager+'"><a class="technologyName">'+tableJSON[key]._id+'</a></td><td class="countPositions">'+tableJSON[key].positionCheckCount+'</td>';
 
-                firstOverlay += "<div class='techPopup' for='"+tableJSON[key]._id+"'><div><span class='closeButton glyphicon glyphicon-remove' onclick='closePopUp(this);'></span><h5>List of VPs for "+tableJSON[key]._id+" and positions open under them</h5><span class='title'>Technology Managers</span><span class='title'>Open Positions</span></div></div>";
+                firstOverlay += "<div class='techPopup' for='"+tableJSON[key]._id+"'><div class='secHeader'><span class='closeButton glyphicon glyphicon-remove' onclick='closePopUp(this);'></span><h5>List of VPs for "+tableJSON[key]._id+" and positions open under them</h5><span class='title'>Technology Managers</span><span class='title'>Open Positions</span></div></div>";
                 
                 for (var key2 in table2JSON) {
 
@@ -251,20 +286,18 @@
                     }
                 }
 
-
-
               }
 
-              tableRow += '</tr>';
+              tableRow += '</tr><tr style="display: none;">';
             }
 
             $('.SummaryBody').html(tableRow);
+
             $('.firstLevelDetail').html(firstOverlay);
 
             $('.SummaryBody tr').each( function( index, element ){
                 if($(this).find('td').length == 2) {
                     var tech = $($(this).find('td')[0]).text();
-                    console.log(tech);
                    $(this).append("<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td for='"+tech+"' class='getOfferSelectedCount'>0</td>"); 
                 }
             });
@@ -273,21 +306,48 @@
 
                 var firstLevelData = "";
                 firstLevelData += $('.firstLevelDetail div[for="'+techClickData2[key3]._id["technology"]+'"]').html();
-                firstLevelData += "<div><span class='firstSpan'><a for='"+techClickData2[key3]._id["technology"]+"' onclick='openCandidatesDetails(this);'>"+techClickData2[key3]._id["manager"]+"</a></span><span>"+techClickData2[key3].totalValue+"</span></div>";
+                firstLevelData += "<div for='"+techClickData2[key3]._id["manager"]+"'><span class='firstSpan'><a for='"+techClickData2[key3]._id["technology"]+"' onclick='openCandidatesDetails(this);'>"+techClickData2[key3]._id["manager"]+"</a></span><span>"+techClickData2[key3].totalValue+"</span></div>";
 
                 $('.firstLevelDetail div[for="'+techClickData2[key3]._id["technology"]+'"]').html(firstLevelData);
+
+                if(userInfo[0].role == 'user' && userInfo[0].name == techClickData2[key3]._id["manager"]) {
+
+                    $('.SummaryBody tr td[for*="'+userInfo[0].name+'"] > a:contains("'+techClickData2[key3]._id["technology"]+'")').parent().next().html(techClickData2[key3].totalValue);
+
+                    userOpenPositions += techClickData2[key3].totalValue;
+                }
+                
             }
 
             for (var key6 in OfferedNumber) {
 
+
                 $('td.getOfferSelectedCount[for="'+OfferedNumber[key6]._id+'"]').text(OfferedNumber[key6].totalOffered).attr('onclick', "showOfferDetails(this)");
             }
+
+            $('#userName').html(userInfo[0].name);
+
+            if(userInfo[0].role != 'user'){
+                $('.SummaryBody tr').show();
+
+            }else {
+                $('.SummaryBody tr td[for*="'+userInfo[0].name+'"]').parent().show();
+                $('.totalPositions').html(userOpenPositions);
+            }
+
 
             $('.technologyName').on('click', function() {
                 $('.techPopup').hide();
                 $('.offerCandidateDetails').show().goTo();
+
                 var techSelected = $(this).text();
                 $('.firstLevelDetail div[for="'+techSelected+'"]').show();
+                if(userInfo[0].role == 'user') {
+                    $('.techPopup div').hide();
+                    $('.firstLevelDetail div[for="'+techSelected+'"] .secHeader').show();
+                    $('.firstLevelDetail div[for="'+techSelected+'"] div[for*="'+userInfo[0].name+'"]').show();
+                }
+
                 $('.offerCandidateDetails').hide();
                 $('.secondLevelDetail').hide();
             });
@@ -358,9 +418,10 @@
 </head>
 <body>
      <div class="logo-banner">
-        <form class="form-horizontal" action="displaydashboard" method="post" enctype="multipart/form-data">
+        <form class="form-horizontal" action="mainDashboard" method="get" enctype="multipart/form-data">
             <input class="logo-text text-button" type="submit" name="" id="fetchCanVendorMap" value="Time Inc.">
         </form>
+        <div class="session-details"><span class="glyphicon glyphicon-user"></span> <span id="userName"></span> &nbsp;&nbsp;</div>
     </div>
 
     <div class="container" style="width: 90%;">
@@ -368,17 +429,25 @@
         <div class="row">
             <div class="col-lg-6"></div>
             <div class="col-lg-6 button-section">
-                <!-- <form class="form-horizontal pull-right" action="fetchVendorMapPage" method="post" enctype="multipart/form-data">
-                    <input class="btn" type="submit" name="" id="fetchCanVendorMap" value="Map Vendor Candidate">
-                </form> -->
-                <form class="form-horizontal pull-right" action="uploadVendor" method="post" enctype="multipart/form-data">
+                
+                <form class="hide-role-user hide-role-hr form-horizontal pull-right" action="uploadVendor" method="post" enctype="multipart/form-data">
                     <input class="btn" type="submit" name="" id="uploadVendor" value="Vendor Screen">
                 </form>
-                <form class="form-horizontal pull-right" action="getOfferScreen" method="post" enctype="multipart/form-data">
+
+                <form class="hide-role-user form-horizontal pull-right hide-role-admin" action="getOfferScreen" method="post" enctype="multipart/form-data">
                     <input class="btn" type="submit" name="" id="getOfferScreen" value="HR Screen">
                 </form>
-                <form class="form-horizontal pull-right" action="getOpenPositions" method="post" enctype="multipart/form-data">
+
+                <form class="hide-role-user form-horizontal pull-right hide-role-hr" action="getOpenPositions" method="post" enctype="multipart/form-data">
                     <input class="btn " type="submit" name="" id="getOpenPositions" value="Add Positions">
+                </form>
+
+                <form class="hide-role-user form-horizontal pull-right" action="getreports" method="post" enctype="multipart/form-data">
+                    <input class="btn " type="submit" name="" id="getReports" value="Get Reports">
+                </form>
+
+                <form class="hide-role-user form-horizontal pull-right hide-role-admin hide-role-hr" action="adminConfigure" method="post" enctype="multipart/form-data">
+                    <input class="btn " type="submit" name="" id="adminConfigure" value="Access and Configuration">
                 </form>
             </div>
         </div>
@@ -389,17 +458,21 @@
         </div>
 
         <div class="dispaly totalSummary row">
-            <div class="col-lg-2 summaryNos">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 summaryNos">
                 <span>Total Open Positions: </span><br/>
-                <span class="totalPositions"></span>
+                <span class="totalPositions">0</span>
             </div>
-            <div class="col-lg-2 summaryNos greenBox">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 summaryNos greenBox">
                 <span>Total positions Filled: </span><br/>
-                <span class="filledPositions"></span>
+                <span class="filledPositions">0</span>
             </div>
-            <div class="col-lg-2 summaryNos yellowBox">
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 summaryNos yellowBox">
                 <span>Total Positions Remaining: </span><br/>
-                <span class="remainingPositions"></span>
+                <span class="remainingPositions">0</span>
+            </div>
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 summaryNos orangeBox">
+                <span>BackUp Positions: </span><br/>
+                <span class="backUpPositions">0</span>
             </div>
         </div>
 

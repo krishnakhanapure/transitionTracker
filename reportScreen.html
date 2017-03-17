@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<HTML>
+
+<meta charset="utf-8">
+    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
+    <title>Enter Open Positions</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sortable/0.8.0/css/sortable-theme-bootstrap.css">
+    <style>
+        form {
+            margin: 0px;
+            float: left;
+            margin-right: 5px;
+        }
+        @font-face {
+            font-family: "timeFont";
+            src: url(img/Horsham-Serial-Bold 2.ttf) format("truetype");
+        }
+
+        .logo-text { 
+            font-family: "timeFont";
+        }
+
+        .logo-banner {
+            height: 121px;
+            background-color: #FCFEFF;
+            -webkit-box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+            box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+        }
+
+        .logo-text {
+            display: inline-block;
+            font-size: 59px;
+            padding: 20px 25px;
+            font-weight: bold;
+            color: #25A7DD;
+        }
+
+        .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+            color: #fff !important;
+            cursor: default;
+            background-color: #16A085 !important;
+            border: 1px solid #16A085 !important;
+            border-bottom-color: transparent;
+            border-radius: 0px;
+        }
+
+        .nav-tabs {
+            border-bottom: 2px solid #16A085 !important;
+        }
+
+        a {
+            color: #2C3E50;
+        }
+    
+         input[type="submit"] {
+            background-color: #2980B9;
+            border: #2980B9;
+            color: #fff;
+            text-shadow: none;
+            padding: 9px;
+            border-radius: 0px;
+            height: 50px;
+            border-right: 1px solid #fff;
+        }
+
+        input.text-button {
+            background-color: #fff;
+            color: #25A7DD;
+            height: auto;
+            padding-left: 15px;
+            outline: none;
+        }
+
+
+        #greeting {
+            float: right;
+        }
+
+        #username {
+            padding-right: 10px;
+        }
+
+        /*.role-superadmin .hide-role-superadmin {display:none}*/
+        .role-admin .hide-role-admin {display: none}
+        .role-hr .hide-role-hr {display: none}
+        .role-user .hide-role-user {display: none}
+
+        .container, .tab-content {
+            margin-top: 3%;
+        }
+
+        thead tr {
+            background-color: #2577B5 !important;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        table {
+            border: 1px solid #e0e0e0 !important;
+            margin-bottom: 0px !important;
+        }
+
+        .edit-link {
+            text-decoration: none !important;
+            cursor: pointer;
+        }
+
+        #updateData {
+            margin: 0px auto;
+            float: none;
+        }
+
+        #updateFormSection {
+            margin: 0 auto !important;
+            background-color: transparent !important;
+            width: 80% !important;
+        }
+
+        input[type="text"],input[type="number"],input[type="email"],input[type="date"], select {
+            height: 40px !important;
+        }
+
+        .modal-header {
+            padding: 25px;
+            border-bottom: 1px solid #e5e5e5;
+            background-color: #2577B5 !important;
+            color: #fff;
+        }
+
+        .modal-footer {
+            background-color: transparent;
+            border: none;
+        }
+
+        .updateButton {
+            background-color: #2980B9;
+            border: #2980B9;
+            color: #fff;
+            text-shadow: none;
+            padding: 9px;
+        }
+
+        .close {
+            color: #fff;
+            opacity: 1;
+        }
+
+    </style>
+
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sortable/0.8.0/js/sortable.min.js"></script>
+
+    <script type="text/javascript">
+        var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}}
+
+        $(document).ready(function(){
+           
+           userInfo = JSON.parse(userDetails);
+
+            var userRole = 'role-'+userInfo[0].role;
+            $('body').addClass(userRole);
+
+            (function($) {
+                $.fn.goTo = function() {
+                    $('html, body').animate({
+                        scrollTop: $(this).offset().top + 'px'
+                    }, 'fast');
+                    return this; // for chaining...
+                }
+            })(jQuery);
+        
+            var openPositionsArr = JSON.parse(openPositionsJSON);
+            var data2 = "<tr>";
+
+            for (var key in openPositionsArr) {
+
+                data2 += "<td>"+openPositionsArr[key].technology+"</td><td>"+openPositionsArr[key].title+"</td><td>"+openPositionsArr[key].NYMgr+"</td><td>"+openPositionsArr[key].jobDesc+"</td><td>"+openPositionsArr[key].positionCheck+"</td><td>"+openPositionsArr[key].availability+"</td><td>"+openPositionsArr[key].workday+"</td><td>"+openPositionsArr[key].greenhouse+"</td>";
+
+                data2 += "</tr><tr>";
+            }
+
+            data2 += "</tr>";
+            $('.openPositionSummary').html(data2);
+
+            
+            var data = "<tr>";
+            var data3 = "<tr>";
+            offerDetails = JSON.parse(offerReleasedDetails);
+            interviewStatArr = JSON.parse(interviewStatJSON);
+
+
+            for (var key in offerDetails) {
+
+                data += "<td>"+offerDetails[key].candidateName+"</td><td>"+offerDetails[key].title+"</td><td>"+offerDetails[key].technology+"</td><td>"+offerDetails[key].doj+"</td><td>"+offerDetails[key].candidateExpn+"</td><td>"+Base64.decode(offerDetails[key].candidateCTC)+"</td><td>"+Base64.decode(offerDetails[key].candidatePCTC)+"</td><td>"+offerDetails[key].candidatehike+"</td><td>"+offerDetails[key].candidateNumber+"</td><td>"+offerDetails[key].candidateEmail+"</td><td>"+offerDetails[key].backupOffer+"</td>";
+
+                data += "</tr><tr>";
+            }
+
+            for (var key in interviewStatArr) {
+
+                data3 += "<td>"+interviewStatArr[key].technologyStat+"</td><td>"+interviewStatArr[key].titleStat+"</td><td>"+interviewStatArr[key].weekDate+"</td><td>"+interviewStatArr[key].source+"</td><td>"+interviewStatArr[key].testCount+"</td><td>"+interviewStatArr[key].techOneCount+"</td><td>"+interviewStatArr[key].techTwoCount+"</td><td>"+interviewStatArr[key].HRCount+"</td><td>"+interviewStatArr[key].stakeHolderCount+"</td>";
+
+                data3 += "</tr><tr>";
+            }
+
+            $('.interviewStatSummary').html(data3);
+            $('.offerLetterSummary').html(data);
+
+            venStaffDataJSONArr = JSON.parse(venStaffDataJSON);                   
+            var data4 = "<tr>";
+                    
+            for (var key in venStaffDataJSONArr) {
+
+                data4 += "<td>"+venStaffDataJSONArr[key].staffName+"</td><td>"+venStaffDataJSONArr[key].technology+"</td><td>"+venStaffDataJSONArr[key].vendorName+"</td><td>"+venStaffDataJSONArr[key].VpName+"</td>";
+
+                data4 += "</tr><tr>";
+            }
+
+            $('.VendorStaffSummary').html(data4);
+
+            mapReportListJSON = JSON.parse(mapReportList);
+            var data5 = "<tr>";
+            var data6 = "<tr>";
+
+            for (var key2 in mapReportListJSON) {
+
+                if(mapReportListJSON[key2].backfillPosition == "Yes") {
+
+                    data5 += "<td>"+mapReportListJSON[key2].candidateList+"</td><td>"+mapReportListJSON[key2].candidateTechnology+"</td><td>"+mapReportListJSON[key2].candidateTitle+"</td><td>"+mapReportListJSON[key2].candidateDOJ+"</td><td>"+mapReportListJSON[key2].vendorStaff+"</td><td>"+mapReportListJSON[key2].VpName+"</td><td>"+mapReportListJSON[key2].offshoreMgr+"</td><td for="+mapReportListJSON[key3]._id+"><a id='canVendorMap' title='Edit Row' data-toggle='modal' data-target='#updateFormSection' class='edit-link glyphicon glyphicon-pencil'>&nbsp;</a></td>";
+
+                    data5 += "</tr><tr>";
+
+                }else {
+
+                    data6 += "<td>"+mapReportListJSON[key2].candidateList+"</td><td>"+mapReportListJSON[key2].candidateTechnology+"</td><td>"+mapReportListJSON[key2].candidateTitle+"</td><td>"+mapReportListJSON[key2].candidateDOJ+"</td><td>"+mapReportListJSON[key2].vendorStaff+"</td><td>"+mapReportListJSON[key2].VpName+"</td><td>"+mapReportListJSON[key2].offshoreMgr+"</td><td for="+mapReportListJSON[key3]._id+"><a id='canVendorMap' title='Edit Row' data-toggle='modal' data-target='#updateFormSection' class='edit-link glyphicon glyphicon-pencil'>&nbsp;</a></td>";
+
+                    data6 += "</tr><tr>";
+
+                }
+            }
+
+            $('.CanVendorMapSummary').html(data5);
+            $('.CanVendorMapBackFillSummary').html(data6);
+
+            UserListJSONArr = JSON.parse(UserListJSON);                   
+            var data7 = "<tr>";
+                        
+            for (var key3 in UserListJSONArr) {
+
+                data7 += "<td>"+UserListJSONArr[key3].name+"</td><td>"+UserListJSONArr[key3].email+"</td><td>"+UserListJSONArr[key3].role+"</td><td for="+UserListJSONArr[key3]._id+"><a title='Edit Row' data-toggle='modal' data-target='#updateFormSection' id='login' class='edit-link glyphicon glyphicon-pencil'>&nbsp;</a></td>";
+
+                data7 += "</tr><tr>";
+            }
+
+            $('.usersListSummary').html(data7);
+
+            $('.edit-link').on('click', function() {
+                if($(this).attr('id') == "login") {
+                    $('#newUserName').val($($(this).parent().siblings()[0]).text());
+                    $('#newUserRole option[value="'+$($(this).parent().siblings()[2]).text()+'"]').attr('selected','selected');
+                    $('#newUserEmail').val($($(this).parent().siblings()[1]).text());
+
+                    var id = $(this).parent().attr('for');
+                    $('#rowID').val(id).attr('value',id);
+                    $('#collectionName').val('login').attr('value','login');
+
+                    $('.update-section').hide();
+                    $('#userUpdate').show();
+
+                }else if($(this).attr('id') == "canVendorMap") {
+                    $('#newUserName').val($($(this).parent().siblings()[0]).text());
+                    $('#newUserRole option[value="'+$($(this).parent().siblings()[2]).text()+'"]').attr('selected','selected');
+                    $('#newUserEmail').val($($(this).parent().siblings()[1]).text());
+
+                    var id = $(this).parent().attr('for');
+                    $('#rowID').val(id).attr('value',id);
+                    $('#collectionName').val('VendorCandidateMap').attr('value','VendorCandidateMap');
+
+                    $('.update-section').hide();
+                    $('#venCanUpdate').show();
+                }
+
+            });
+        });
+
+    </script>
+
+<body>
+    <div class="logo-banner">
+        <form class="form-horizontal" action="mainDashboard" method="get" enctype="multipart/form-data">
+            <input class="logo-text text-button" type="submit" name="" id="fetchCanVendorMap" value="Time Inc.">
+        </form>
+        <div id="greeting">Welcome <span id="username"></span></div>
+    </div>
+
+    <div class="container">
+        <form id="updateData" action="updateData" method="post" enctype="multipart/form-data">
+            <input type="hidden" value="" id="collectionName" name="collectionName"/>
+            <input type="hidden" value="" id="rowID" name="rowID"/>
+
+            <div class="modal fade" id="updateFormSection" role="dialog">
+                <div class="modal-dialog">
+                
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                        <h4 class="modal-title">Please add the data to Update:</h4>
+                    </div>
+                    <div class="modal-body">
+                        <fieldset class="form-content update-section" id="userUpdate">
+                 
+                            <!-- Title  input-->
+                            <div class="control-group">
+                                <label class="control-label">Add User Name:</label>
+                                <div class="controls">
+                                    <input id="newUserName" name="newUserName" type="text" placeholder="User Name"
+                                    class="input-xlarge form-control" />
+                                </div>
+                            </div>
+
+                            <!-- Manager input-->
+                            <div class="control-group">
+                                <label class="control-label">Add User Role:</label>
+                                <div class="controls">
+                                    <select id="newUserRole" name="newUserRole" class="input-xlarge form-control">
+                                          <option value="">Please Select a Role</option>
+                                          <option value="superadmin">Super Admin</option>
+                                          <option value="admin">Admin</option>
+                                          <option value="hr">HR</option>
+                                          <option value="user">User</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Candidate Name input-->
+                            <div class="control-group">
+                                <label class="control-label">Add User Email:</label>
+                                <div class="controls">
+                                    <input id="newUserEmail" name="newUserEmail" type="email" placeholder="User Email"
+                                    class="input-xlarge form-control" />
+                                </div>
+                            </div>
+
+                        </fieldset>
+
+                        <fieldset class="form-content" style="display:none">
+                            <!-- Address form -->
+                     
+                            <!-- Candidate Name input-->
+                            <div class="control-group">
+                                <label class="control-label">Candidate Name:</label>
+                                <div class="controls">
+                                   <input id="newName" name="newName" type="text" placeholder=" Name" class="input-xlarge form-control" />
+                                </div>
+                            </div>
+
+                            <!-- Candidate Name input-->
+                            <div class="control-group">
+                                <label class="control-label">Candidate Title:</label>
+                                <div class="controls">
+                                   <input id="newTitle" name="newTitle" type="text" placeholder=" Title" class="input-xlarge form-control" />
+                                </div>
+                            </div>
+
+                            <!-- Candidate Name input-->
+                            <div class="control-group">
+                                <label class="control-label">Candidate Technology:</label>
+                                <div class="controls">
+                                   <input id="newTechnology" name="newTechnology" type="text" placeholder="Technology" class="input-xlarge form-control" />
+                                </div>
+                            </div>
+
+                            <!-- Candidate Name input-->
+                            <div class="control-group">
+                                <label class="control-label">Candidate DOJ:</label>
+                                <div class="controls">
+                                   <input id="newdate" name="" type="date" class="input-xlarge form-control" />
+                                </div>
+                            </div>
+
+                            
+                            <!-- NY input-->
+                             <div class="control-group">
+                                <label class="control-label ">VP Name:</label>
+                                <div class="controls">
+                                    <select required id="VpName" name="VpName" class="form-control input-xlarge" onchange="populateVendor(this.value);">
+                                    
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Vendor Staff input-->
+                            <div class="control-group">
+                                <label class="control-label">Vendor Staff:</label>
+                                <div class="controls">
+                                    <select required id="vendorStaff" name="vendorStaff" class="input-xlarge form-control">
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- NY input-->
+                             <div class="control-group ">
+                                <label class="control-label">Offshore Manager:</label>
+                                <div class="controls">
+                                    <select required id="offshoreMgr" name="offshoreMgr" class="input-xlarge form-control">
+                                        
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <!--  Backfill position input-->
+                            <div class="control-group">
+                                <label class="control-label"></label>
+                                <div class="controls">
+                                    <input class="btn" type="checkbox" name="backfillPosition" id="backfillPosition" value="Yes" /> Moved out of vendor transition
+                                </div>
+                            </div>
+                        </fieldset>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default updateButton" data-dismiss="">Update Data</button>
+                    </div>
+                  </div>
+                  
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="container">
+
+      <ul class="nav nav-tabs">
+            <li class="active hide-role-hr"><a data-toggle="tab" href="#home">Open Positions</a></li>
+            <li><a data-toggle="tab" href="#menu1">Interview Stats</a></li>
+            <li><a data-toggle="tab" href="#menu2">Offered Candidates Details</a></li>
+            <li class="hide-role-hr"><a data-toggle="tab" href="#menu3">Vendor Candidate Map</a></li>
+            <li class="hide-role-hr"><a data-toggle="tab" href="#menu4">Mapped Candidates BackFill</a></li>
+            <li class="hide-role-hr"><a data-toggle="tab" href="#menu5">Vendor Staff Details</a></li>
+            <li class="hide-role-hr hide-role-admin hide-role-user"><a data-toggle="tab" href="#menu6">Users List</a></li>
+      </ul>
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+               <div class="openPositionsReport">
+                    <table class="table second-level-table table-striped sortable-theme-bootstrap" data-sortable>
+                        <thead>
+                            <tr style="background-color: #46AFF2; color: #fff; font-size: 14px;">
+                                <th>Technology</th>
+                                <th>Title</th>
+                                <th>NY Manager</th>
+                                <th>Job Description</th>
+                                <th>Open Positions</th>
+                                <th>Availability</th>
+                                <th>Work Day</th>
+                                <th>Green House</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="openPositionSummary">
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="menu1" class="tab-pane fade">
+                <div class="interviewStatDetails">
+
+                    <table class="table second-level-table table-striped sortable-theme-bootstrap" data-sortable>
+                        <thead>
+                            <tr style="background-color: #46AFF2; color: #fff; font-size: 14px;">
+                                <th>Technology</th>
+                                <th>Title</th>
+                                <th>Week When Interview Held</th>
+                                <th>Source</th>
+                                <th>Total Test cleared</th>
+                                <th>Total Tech1 Cleared</th>
+                                <th>Total Tech2 Cleared</th>
+                                <th>Total HR round Cleared</th>
+                                <th>Total skakeholder round cleared</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="interviewStatSummary">
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="menu2" class="tab-pane fade">
+                <div class="offerLetterDetails">
+
+                    <table class="table second-level-table table-striped sortable-theme-bootstrap" data-sortable>
+                        <thead>
+                            <tr style="background-color: #46AFF2; color: #fff; font-size: 14px;">
+                                <th>Candidate Name</th>
+                                <th>Title</th>
+                                <th>Technology</th>
+                                <th>DOJ</th>
+                                <th>Experience</th>
+                                <th>Candidate CTC</th>
+                                <th>Proposed CTC</th>
+                                <th>% Hike</th>
+                                <th>Contact.No</th>
+                                <th>Email ID</th>
+                                <th>Backup Offer</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="offerLetterSummary">
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="menu3" class="tab-pane fade">
+                <div class="VendorMapReportBackFill">
+
+                    <table class="table second-level-table table-striped sortable-theme-bootstrap" data-sortable>
+                        <thead>
+                            <tr style="background-color: #46AFF2; color: #fff; font-size: 14px;">
+                                <th>Candidate Name</th>
+                                <th>Candidate Technology</th>
+                                <th>Candidate Title</th>
+                                <th>Candidate DOJ</th>
+                                <th>Vendor Staff</th>
+                                <th>VP Name</th>
+                                <th>Offshore Manager</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="CanVendorMapBackFillSummary">
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="menu4" class="tab-pane fade">
+                <div class="VendorMapReport">
+
+                    <table class="table second-level-table table-striped sortable-theme-bootstrap" data-sortable>
+                        <thead>
+                            <tr style="background-color: #46AFF2; color: #fff; font-size: 14px;">
+                                <th>Candidate Name</th>
+                                <th>Candidate Technology</th>
+                                <th>Candidate Title</th>
+                                <th>Candidate DOJ</th>
+                                <th>Vendor Staff</th>
+                                <th>VP Name</th>
+                                <th>Offshore Manager</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="CanVendorMapSummary">
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="menu5" class="tab-pane fade">
+                <div class="VendorStaffReport">
+
+                    <table class="table second-level-table table-striped sortable-theme-bootstrap" data-sortable>
+                        <thead>
+                            <tr style="background-color: #46AFF2; color: #fff; font-size: 14px;">
+                                <th>Staff Name</th>
+                                <th>Technology</th>
+                                <th>Vendor Name</th>
+                                <th>VP Name</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="VendorStaffSummary">
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="menu6" class="tab-pane fade">
+                <div class="usersListReport">
+
+                    <table class="table second-level-table table-striped sortable-theme-bootstrap" data-sortable>
+                        <thead>
+                            <tr style="background-color: #46AFF2; color: #fff; font-size: 14px;">
+                                <th>User Name</th>
+                                <th>User Email</th>
+                                <th>User Role</th>
+                                <th>Edit</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="usersListSummary">
+                           
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</HTML>
