@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
+    <title>Login Form</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <style type="text/css">
+
+        #addSkillsContainer {
+                margin: 10px 0px;
+        }
+
+        .newSkill {
+            margin-right: 5px;
+            width: 20%;
+        }
+
+        .newSkillPriority {
+            width: 12%;
+        }
+
+        .NScontainer {
+            margin-bottom: 8px;
+        }
+
+        .container {
+            margin-top: 3%;
+        }
+
+        input[type="submit"], input[type="button"]{
+            background-color: #2980B9;
+            border: #2980B9;
+            color: #fff;
+            text-shadow: none;
+            padding: 9px;
+        }
+
+        input[type="text"],input[type="number"],input[type="email"],input[type="date"], select {
+            height: 40px !important;
+        }
+
+        .form-control {
+            width: 80%;
+        }
+
+        .closeButton {
+            padding-left: 7px;
+        }
+
+        .control-label {
+            width: 29% !important;
+            margin-right: 25px;
+        }
+
+        .controls {
+            margin-left: 31% !important;
+        }
+
+        .closeButton {
+            left: 97%;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+
+        @font-face {
+            font-family: "timeFont";
+            src: url(img/Horsham-Serial-Bold 2.ttf) format("truetype");
+        }
+
+        .logo-text { 
+            font-family: "timeFont";
+        }
+
+        h3 {
+            padding: 10px;
+            text-align: center;
+            margin: auto;
+            background-color: #2980B9;
+            color: #fff;
+            padding: 26px;
+            margin-bottom: 30px;
+        }
+
+        .form-content {
+            background-color: #fff;
+            margin: auto;
+            width: 70%;
+            -webkit-box-shadow: 10px 10px 19px -5px rgba(0,0,0,1);
+            -moz-box-shadow: 10px 10px 19px -5px rgba(0,0,0,1);
+            box-shadow: 10px 10px 19px -5px rgba(0,0,0,1);
+            margin-top: 40px;
+            border: 1px solid #e9e9e9;
+        }
+
+        body {
+            background-color: #ffffff;
+        }
+
+        .logo-banner {
+            height: 121px;
+            background-color: #FCFEFF;
+            -webkit-box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+            box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+        }
+
+        .logo-text {
+            display: inline-block;
+            font-size: 59px;
+            padding: 20px 25px;
+            font-weight: bold;
+            color: #25A7DD;
+        }
+
+        .nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+            color: #fff !important;
+            cursor: default;
+            background-color: #16A085 !important;
+            border: 1px solid #16A085 !important;
+            border-bottom-color: transparent;
+            border-radius: 0px;
+        }
+
+        .nav-tabs {
+            border-bottom: 2px solid #16A085 !important;
+        }
+
+        a {
+            color: #2C3E50;
+        }
+
+        input.text-button {
+            background-color: #fff;
+            color: #25A7DD;
+            height: auto;
+            padding-left: 15px;
+            outline: none;
+        }
+
+        th {
+            font-size: 13px;
+            font-weight: normal;
+        }
+
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
+    <script>
+        var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9+/=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/rn/g,"n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}}
+
+        $(document).ready(function() {
+            offerDetails = JSON.parse(offerReleasedDetails);
+            techTitleArr = JSON.parse(techTitleArrJSON);
+            interviewStatArr = JSON.parse(interviewStatJSON);
+            
+            var data = "<tr>";
+            var data2 = '<option value="" selected="selected">(please select a Technology)</option>';
+            var data3 = "<tr>";
+
+            for (var key in offerDetails) {
+
+                data += "<td>"+offerDetails[key].candidateName+"</td><td>"+offerDetails[key].title+"</td><td>"+offerDetails[key].technology+"</td><td>"+offerDetails[key].doj+"</td><td>"+offerDetails[key].candidateExpn+"</td><td>"+Base64.decode(offerDetails[key].candidateCTC)+"</td><td>"+Base64.decode(offerDetails[key].candidatePCTC)+"</td><td>"+offerDetails[key].candidatehike+"</td><td>"+offerDetails[key].candidateNumber+"</td><td>"+offerDetails[key].candidateEmail+"</td>";
+
+                data += "</tr><tr>";
+            }
+
+            for (var key in interviewStatArr) {
+
+                data3 += "<td>"+interviewStatArr[key].technologyStat+"</td><td>"+interviewStatArr[key].titleStat+"</td><td>"+interviewStatArr[key].weekDate+"</td><td>"+interviewStatArr[key].source+"</td><td>"+interviewStatArr[key].testCount+"</td><td>"+interviewStatArr[key].techOneCount+"</td><td>"+interviewStatArr[key].techTwoCount+"</td><td>"+interviewStatArr[key].HRCount+"</td><td>"+interviewStatArr[key].stakeHolderCount+"</td>";
+
+                data3 += "</tr><tr>";
+            }
+
+            for (var key2 in techTitleArr) {
+
+                data2 += "<option value='"+techTitleArr[key2]._id+"'>"+techTitleArr[key2]._id+"</option>";
+
+            }
+            
+            $('.interviewStatSummary').html(data3);
+            $('.offerLetterSummary').html(data);
+            $('#technology').html(data2);
+            $('#technologyStat').html(data2);
+
+            (function($) {
+                $.fn.goTo = function() {
+                    $('html, body').animate({
+                        scrollTop: $(this).offset().top + 'px'
+                    }, 'fast');
+                    return this; // for chaining...
+                }
+            })(jQuery);
+            
+        });
+
+        function openReport(tableName) {
+            $('.'+tableName).show().goTo();
+        }
+
+        function closePopUp2(e,tableName) {
+            $('.'+tableName).hide();
+        }
+
+        function getTitle(techSelected) {
+            var data3 = '<option value="" selected="selected">(please select a level)</option>';
+
+            for (var key3 in techTitleArr) {
+                if(techTitleArr[key3]._id == techSelected) {
+                    for(var key4 in techTitleArr[key3].title) {
+                        data3 += "<option value='"+techTitleArr[key3].title[key4]+"'>"+techTitleArr[key3].title[key4]+"</option>";
+                    }
+                }
+
+            }
+            
+            $('#title').html(data3);
+            $('#titleStat').html(data3);
+        }
+
+        function changeDateFormat(e) {
+            oldDate = (e.value).split('-');
+            newDate = oldDate[1]+"-"+oldDate[2]+"-"+oldDate[0];
+            $("input[name="+e.id+"]").val(newDate);
+        }
+
+        function populateHike() {
+            if($('#candidateCTC').val() != '' && $('#candidatePCTC').val() != '') {
+                var newCTC = $('#candidatePCTC').val();
+                var oldCTC = $('#candidateCTC').val();
+
+                var hikePercentage = parseFloat(((parseFloat(newCTC - oldCTC))/oldCTC)*100);
+                $('#candidatehike').val(hikePercentage.toFixed(2)+'%');
+            }
+        }
+
+        function changeProposed(val) {
+            var hikeNumber = val.substr(0,val.length-1);
+
+            if($('#candidateCTC').val() != '' && $('#candidatePCTC').val() != '') {
+                var newCTC = $('#candidatePCTC').val();
+                var oldCTC = $('#candidateCTC').val();
+
+                var newProposed = ((hikeNumber/100)*oldCTC)+parseFloat(oldCTC);
+                $('#candidatePCTC').val(newProposed.toFixed(2));
+            }
+        }
+
+        function encodeVals() {
+            var encodedString1 = Base64.encode($('#candidateCTC').val());
+            var encodedString2 = Base64.encode($('#candidatePCTC').val());
+
+            $('#candidateCTC').val(encodedString1).attr('value',encodedString1);
+            $('#candidatePCTC').val(encodedString2).attr('value',encodedString2);
+        }
+
+    </script>
+</head>
+<body>
+<div class="logo-banner">
+    <form class="form-horizontal" action="displaydashboard" method="post" enctype="multipart/form-data">
+        <input class="logo-text text-button" type="submit" name="" id="fetchCanVendorMap" value="Time Inc.">
+    </form>
+</div>
+
+<div class="container">
+
+  <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#home">Offer released</a></li>
+        <li><a data-toggle="tab" href="#menu1">Interview Stats</a></li>
+  </ul>
+
+    <div class="tab-content">
+        <div id="home" class="tab-pane fade in active">
+
+            <div>
+
+                 <form class="form-horizontal" action="candidatesOfferReleased" method="post" enctype="multipart/form-data">
+                    <input type="hidden" value="" name="doj" id="hiddendoj" />
+                    <fieldset class="form-content">
+                        <!-- Address form -->
+                 
+                        <h3>Enter Information for Candidates Offer Released</h3>
+
+                        <!-- Candidate Name input-->
+                        <div class="control-group">
+                            <label class="control-label">Name:</label>
+                            <div class="controls">
+                                <input required id="candidateName" name="candidateName" type="text" placeholder="Name"
+                                class="input-xlarge form-control" />
+                            </div>
+                        </div>
+
+                        <!-- Technology input-->
+                        <div class="control-group">
+                            <label class="control-label">Technology:</label>
+                            <div class="controls">
+                                <select required id="technology" name="technology" class="input-xlarge form-control" onchange="getTitle(this.value);">
+                                    
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="control-group"">
+                            <label class="control-label">Level:</label>
+                            <div class="controls">
+                                <select required id="title" name="title" class="input-xlarge form-control">
+                                                         
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Date Of Joining input-->
+                        <div class="control-group">
+                            <label class="control-label">Date of Joining:</label>
+                            <div class="controls">
+                                <input required format="mm-dd-yyyy" id="doj" name="" type="date" class="input-xlarge form-control" onchange="changeDateFormat(this);"/>
+                            </div>
+                        </div>
+
+                        <!-- Years of Expn input-->
+                        <div class="control-group">
+                            <label class="control-label">Years of Experience:</label>
+                            <div class="controls">
+                                <input required id="candidateExpn" name="candidateExpn" type="number" placeholder="Years of Expn"
+                                class="input-xlarge form-control" step="0.001"/>
+                            </div>
+                        </div>
+
+                        <!-- Current CTC input-->
+                        <div class="control-group">
+                            <label class="control-label">Current CTC:</label>
+                            <div class="controls">
+                                <input required id="candidateCTC" name="candidateCTC" type="text" placeholder="Current CTC"
+                                class="input-xlarge form-control" onblur="populateHike();"/>
+                            </div>
+                        </div>
+
+                        <!-- Proposed CTC input-->
+                        <div class="control-group">
+                            <label class="control-label">Proposed CTC:</label>
+                            <div class="controls">
+                                <input required id="candidatePCTC" name="candidatePCTC" type="text" placeholder="Proposed CTC"
+                                class="input-xlarge form-control" onblur="populateHike();"/>
+                            </div>
+                        </div>
+
+                        <!-- % of hike input-->
+                        <div class="control-group">
+                            <label class="control-label">Hike%:</label>
+                            <div class="controls">
+                                <input required id="candidatehike" name="candidatehike" type="text" placeholder="Hike %"
+                                class="input-xlarge form-control" onblur="changeProposed(this.value);"/>
+                            </div>
+                        </div>
+
+                        <!-- Contact Number input-->
+                        <div class="control-group">
+                            <label class="control-label">Contact No:</label>
+                            <div class="controls">
+                                <input required id="candidateNumber" name="candidateNumber" type="number" placeholder="ph No"
+                                class="input-xlarge form-control" />
+                            </div>
+                        </div>
+
+                        <!-- CEmail input-->
+                        <div class="control-group">
+                            <label class="control-label">Email ID:</label>
+                            <div class="controls">
+                                <input required id="candidateEmail" name="candidateEmail" type="email" placeholder="Email"
+                                class="input-xlarge form-control" />
+                            </div>
+                        </div>
+                        
+                        <!-- submit input-->
+                        <div class="control-group">
+                            <label class="control-label"></label>
+                            <div class="controls">
+                                <input type="submit" name="" id="Submit" value="SUBMIT" onclick="encodeVals();"/>
+                                <input type="button" class="" name="" id="getReport" value="REPORT" onclick="openReport('offerLetterDetails');" />
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="offerLetterDetails" style="display:none;">
+                <span class='closeButton glyphicon glyphicon-remove' onclick='closePopUp2(this,"offerLetterDetails");'></span>
+
+                <table class="table second-level-table table-striped">
+                    <thead>
+                        <tr style="background-color: #46AFF2; color: #fff; font-size: 14px;">
+                            <th>Candidate Name</th>
+                            <th>Title</th>
+                            <th>Technology</th>
+                            <th>DOJ</th>
+                            <th>Experience</th>
+                            <th>Candidate CTC</th>
+                            <th>Proposed CTC</th>
+                            <th>% Hike</th>
+                            <th>Contact.No</th>
+                            <th>Email ID</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="offerLetterSummary">
+                       
+                    </tbody>
+                </table>
+            </div>
+          
+        </div>
+        <div id="menu1" class="tab-pane fade">
+                <div>
+
+                 <form class="form-horizontal" action="interviewStats" method="post" enctype="multipart/form-data">
+                    <input type="hidden" value="" name="weekDate" id="hiddenWeekDate" />
+                    <fieldset class="form-content">
+                        <!-- Address form -->
+                 
+                        <h3>Please Enter the Interview Stack</h3>
+                 
+                        <!-- Technology input-->
+                        <div class="control-group">
+                            <label class="control-label">Technology</label>
+                            <div class="controls">
+                                <select required id="technologyStat" name="technologyStat" class="input-xlarge form-control" onchange="getTitle(this.value);">
+                                    
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Title input-->
+                        <div class="control-group">
+                            <label class="control-label">Level:</label>
+                            <div class="controls">
+                                <select required id="titleStat" name="titleStat" class="input-xlarge form-control">                      
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Week input-->
+                        <div class="control-group">
+                            <label class="control-label">Enter the Week of Interview:</label>
+                            <div class="controls">
+                                <input required id="weekDate" name="" type="date" class="input-xlarge form-control" onchange="changeDateFormat(this);"/>
+                                <p>Enter start of the week</p>
+                            </div>
+                        </div>
+
+                        <!-- Source input-->
+                        <div class="control-group">
+                            <label class="control-label">Source:</label>
+                            <div class="controls">
+                                <input required id="source" name="source" type="text" placeholder="Source"
+                                class="input-xlarge form-control" />
+                            </div>
+                        </div>
+
+                         <!-- Tests Cleared input-->
+                        <div class="control-group">
+                            <label class="control-label">No.of Candidates cleared Test:</label>
+                            <div class="controls">
+                                <input required id="testCount" name="testCount" type="number" placeholder=""
+                                class="input-xlarge form-control" />
+                            </div>
+                        </div>
+
+                        <!-- Technical Round 1 input-->
+                        <div class="control-group">
+                            <label class="control-label">No.of Candidates cleared TechRound1:</label>
+                            <div class="controls">
+                                <input required id="techOneCount" name="techOneCount" type="number" placeholder=""
+                                class="input-xlarge form-control" />
+                            </div>
+                        </div>
+
+                        <!-- Technical Round 2 input-->
+                        <div class="control-group">
+                            <label class="control-label">No.of Candidates cleared TechRound2:</label>
+                            <div class="controls">
+                                <input required id="techTwoCount" name="techTwoCount" type="number" placeholder=""
+                                class="input-xlarge form-control" />
+                            </div>
+                        </div>
+
+                        <!-- HR input-->
+                        <div class="control-group">
+                            <label class="control-label ">No.of Candidates cleared HR:</label>
+                            <div class="controls">
+                                <input required id="HRCount" name="HRCount" type="number" placeholder=""
+                                class="input-xlarge form-control" />
+                            </div>
+                        </div>
+
+                        <!-- Offered Obtsined input-->
+                        <div class="control-group">
+                            <label class="control-label">No.of Candidates Cleard StakeHolder Interview:</label>
+                            <div class="controls">
+                                <input required id="stakeHolderCount" name="stakeHolderCount" type="number" placeholder=""
+                                class="input-xlarge form-control" />
+                            </div>
+                        </div>
+
+                        <!-- submit input-->
+                        <div class="control-group">
+                            <div class="controls">
+                                <input type="submit" name="" id="Submit" value="SUBMIT" />&nbsp;
+                                <input type="button" class="" name="" id="getStatReport" value="Get Interview Stat" onclick="openReport('interviewStatDetails');" />
+                            </div>
+                            
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="interviewStatDetails" style="display:none;">
+                <span class='closeButton glyphicon glyphicon-remove' onclick='closePopUp2(this,"interviewStatDetails");'></span>
+
+                <table class="table second-level-table table-striped">
+                    <thead>
+                        <tr style="background-color: #46AFF2; color: #fff; font-size: 14px;">
+                            <th>Technology</th>
+                            <th>Title</th>
+                            <th>Week When Interview Held</th>
+                            <th>Source</th>
+                            <th>Total Test cleared</th>
+                            <th>Total Tech1 Cleared</th>
+                            <th>Total Tech2 Cleared</th>
+                            <th>Total HR round Cleared</th>
+                            <th>Total skakeholder round cleared</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="interviewStatSummary">
+                       
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+
+</div>
+<script type="text/javascript">
+    
+</script>
+</body>
+</html>

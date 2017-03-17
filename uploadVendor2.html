@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
+    <title>Login Form</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <style type="text/css">
+
+        #addSkillsContainer {
+                margin: 10px 0px;
+        }
+
+        .newSkill {
+            margin-right: 5px;
+            width: 20%;
+        }
+
+        .newSkillPriority {
+            width: 12%;
+        }
+
+        .NScontainer {
+            margin-bottom: 8px;
+        }
+        .container {
+            margin-top: 3%;
+        }
+
+        input[type="submit"], input[type="button"] {
+            background-color: #2980B9;
+            border: #2980B9;
+            color: #fff;
+            text-shadow: none;
+            padding: 9px;
+        }
+
+        input[type="text"],input[type="number"],input[type="email"],input[type="date"], select {
+            height: 43px !important;
+        }
+
+        .form-control {
+            width: 90%;
+        }
+
+        .closeButton {
+            padding-left: 7px;
+        }
+
+        .control-label {
+            width: 29% !important;
+            margin-right: 25px;
+        }
+
+        .controls {
+            margin-left: 31% !important;
+        }
+
+        .closeButton {
+            left: 97%;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+
+        .logo-banner {
+            height: 121px;
+            background-color: #FCFEFF;
+            -webkit-box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+            box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+        }
+
+        .logo-text {
+            display: inline-block;
+            font-size: 59px;
+            padding: 20px 25px;
+            font-weight: bold;
+            color: #25A7DD;
+        }
+
+        @font-face {
+            font-family: "timeFont";
+            src: url(img/Horsham-Serial-Bold 2.ttf) format("truetype");
+        }
+
+        .logo-text { 
+            font-family: "timeFont";
+        }
+
+        h3 {
+            padding: 10px;
+            text-align: center;
+            margin: auto;
+            background-color: #2980B9;
+            color: #fff;
+            padding: 26px;
+            margin-bottom: 30px;
+        }
+
+        .form-content {
+            background-color: #fff;
+            margin: auto;
+            width: 50%;
+            -webkit-box-shadow: 10px 10px 19px -5px rgba(0,0,0,1);
+            -moz-box-shadow: 10px 10px 19px -5px rgba(0,0,0,1);
+            box-shadow: 10px 10px 19px -5px rgba(0,0,0,1);
+            border: 1px solid #e9e9e9;
+        }
+
+        body {
+            background-color: #ffffff;
+        }
+
+        input.text-button {
+            background-color: #fff;
+            color: #25A7DD;
+            height: auto;
+            padding-left: 15px;
+            outline: none;
+        }
+
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="logo-banner">
+    <form class="form-horizontal" action="displaydashboard" method="post" enctype="multipart/form-data">
+        <input class="logo-text text-button" type="submit" name="" id="fetchCanVendorMap" value="Time Inc.">
+    </form>
+</div>
+
+<div class="container">
+    
+    <div class="row">
+         <form class="form-horizontal" action="addVendorDetails" method="post" enctype="multipart/form-data">
+            <fieldset class="form-content">
+                <!-- Address form -->
+         
+                <h3>Please Enter Vendor Details</h3>
+
+                <!-- Name input-->
+                <div class="control-group">
+                    <label class="control-label">Vendor Staff Name:</label>
+                    <div class="controls">
+                        <input required id="staffName" name="staffName" type="text" placeholder="Staff Name"
+                        class="input-xlarge form-control" />
+                    </div>
+                </div>
+         
+                <!-- Technology input-->
+                <div class="control-group">
+                    <label class="control-label">Technology:</label>
+                    <div class="controls">
+                        <select required id="technology" name="technology" class="input-xlarge form-control">
+                            
+                        
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Vendors input-->
+                <div class="control-group">
+                    <label class="control-label">Vendor Name:</label>
+                    <div class="controls">
+                        <select required id="vendorName" name="vendorName" class="input-xlarge form-control">
+                            
+                        </select>
+                    </div>
+                </div>
+
+                <!-- NY input-->
+                 <div class="control-group ">
+                    <label class="control-label">VP Name:</label>
+                    <div class="controls">
+                        <select required id="VpName" name="VpName" class="input-xlarge form-control">
+                            
+                        </select>
+                    </div>
+                </div>
+
+                <!-- submit input-->
+                <div class="control-group">
+                    <div class="controls">
+                        <input type="submit" name="" id="Submit" value="SUBMIT">
+                        <input type="button" name="" id="getReport" value="Get Report" onclick="generateReport();">
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+
+        <div class="VendorStaffReport" style="display:none;">
+            <span class='closeButton glyphicon glyphicon-remove' onclick='closePopUp();'></span>
+
+            <table class="table second-level-table table-striped">
+                <thead>
+                    <tr style="background-color: #46AFF2; color: #fff; font-size: 14px;">
+                        <th>Staff Name</th>
+                        <th>Technology</th>
+                        <th>Vendor Name</th>
+                        <th>VP Name</th>
+                    </tr>
+                </thead>
+
+                <tbody class="VendorStaffSummary">
+                   
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+<script type="text/javascript">
+    var getConfigData = JSON.parse(configJSON);
+    var configTechnology = '<option value="" selected="selected">please select a Technology</option>';
+    var configVendor = '<option value="" selected="selected">please select a Vendor</option>';
+    var configManager = '<option value="" selected="selected">please select a Name</option>';
+
+    $(document).ready(function() {
+            venStaffDataJSONArr = JSON.parse(venStaffDataJSON);
+            
+            
+            var data = "<tr>";
+            
+
+            for (var key in venStaffDataJSONArr) {
+
+                data += "<td>"+venStaffDataJSONArr[key].staffName+"</td><td>"+venStaffDataJSONArr[key].technology+"</td><td>"+venStaffDataJSONArr[key].vendorName+"</td><td>"+venStaffDataJSONArr[key].VpName+"</td>";
+
+                data += "</tr><tr>";
+            }
+
+            $('.VendorStaffSummary').html(data);
+
+
+            for (var key2 in getConfigData.technology) {
+                configTechnology += "<option value='"+getConfigData.technology[key2]+"'>"+getConfigData.technology[key2]+"</option>";
+            }
+            $('#technology').html(configTechnology);
+
+
+
+            for (var key3 in getConfigData.vendorName) {
+                configVendor += "<option value='"+getConfigData.vendorName[key3]+"'>"+getConfigData.vendorName[key3]+"</option>";
+            }
+            $('#vendorName').html(configVendor);
+
+
+            for (var key4 in getConfigData.manager) {
+                configManager += "<option value='"+getConfigData.manager[key4]+"'>"+getConfigData.manager[key4]+"</option>";
+            }
+            $('#VpName').html(configManager);
+
+            (function($) {
+                $.fn.goTo = function() {
+                    $('html, body').animate({
+                        scrollTop: $(this).offset().top + 'px'
+                    }, 'fast');
+                    return this; // for chaining...
+                }
+            })(jQuery);
+                
+    });
+
+    function generateReport() {
+        $('.VendorStaffReport').show().goTo();
+    }
+
+    function closePopUp() {
+        $('.VendorStaffReport').hide();
+    }
+</script>
+</body>
+</html>

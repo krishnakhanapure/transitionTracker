@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
+    <title>Login Form</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <style type="text/css">
+        .container {
+            margin-top: 3%;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		 <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+            <fieldset>
+                <!-- Address form -->
+         
+                <h3>Please Enter the Below Information</h3>
+         
+
+                <!-- Name input-->
+                <div class="control-group">
+                    <label class="control-label">Name:</label>
+                    <div class="controls">
+                        <input id="name" name="name" type="text" placeholder="Name"
+                        class="input-xlarge" />
+                    </div>
+                </div>
+
+                <!-- city input-->
+                <div class="control-group">
+                    <label class="control-label">Employee ID:</label>
+                    <div class="controls">
+                        <input id="empId" name="empId" type="number" placeholder="Employee ID" class="input-xlarge">
+                        <p class="help-block"></p>
+                    </div>
+                </div>
+
+                <!-- Role input-->
+                <div class="control-group">
+                    <label class="control-label">Your Role:</label>
+                    <div class="controls">
+                        <select id="role" name="role" class="input-xlarge">
+                            <option value="" selected="selected">(please select your role)</option>
+                            <option value="director">Director</option>
+                            <option value="manager">Manager</option>
+                            <option value="vp">VP</option>      
+                            <option value="hr">HR</option> 
+                            <option value="sde1">SDE I</option> 
+                            <option value="sde2">SDE II</option>                            
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <!-- <div class="control-group">
+                    <div class="controls">
+                        <input class="btn btn-default" type="file" name="file" id="file" value="upload file">
+                    </div>
+                </div> -->
+
+                <!-- submit input-->
+                <div class="control-group">
+                    <div class="controls">
+                        <input class="btn btn-primary" type="submit" name="submit" id="signIn" value="SIGN IN">
+                    </div>
+                </div>
+                
+            </fieldset>
+        </form>
+
+        <form class="form-horizontal" action="fetchVendorMapPage" method="post" enctype="multipart/form-data">
+            <!-- fetch input-->
+                <div class="control-group">
+                    <div class="controls">
+                        <input class="btn btn-primary" type="submit" name="" id="fetchCanVendorMap" value="FETCH PAGE">
+                    </div>
+                </div>
+        </form>
+
+        <form class="form-horizontal" action="displayDashboard" method="post" enctype="multipart/form-data">
+            <!-- fetch input-->
+                <div class="control-group">
+                    <div class="controls">
+                        <input class="btn btn-primary" type="submit" name="" id="fetchDataForDisplay" value="Display Data">
+                    </div>
+                </div>
+        </form>
+	</div>
+</div>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>

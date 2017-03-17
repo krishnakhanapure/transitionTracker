@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
+    <title>Enter Open Positions</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <style type="text/css">
+
+        #addSkillsContainer {
+                margin: 10px 0px;
+        }
+
+        .newSkill {
+            margin-right: 5px;
+            width: 20%;
+        }
+
+        .newSkillPriority {
+            width: 23%;
+        }
+
+        .NScontainer {
+            margin-bottom: 8px;
+        }
+        .container {
+            margin-top: 3%;
+        }
+
+        input[type="submit"], input[type="button"] {
+            background-color: #2980B9;
+            border: #2980B9;
+            color: #fff;
+            text-shadow: none;
+            padding: 9px;
+        }
+
+        input[type="text"],input[type="number"], select {
+            height: 40px !important;
+        }
+
+        .form-control {
+            width: 70%;
+        }
+
+        span.closeButtonSkill {
+            left: 1%;
+        }
+
+        .closeButton {
+            padding-left: 7px;
+            left: 97.5%;
+            margin-bottom: 6px;
+            cursor: pointer;
+        }
+
+        @font-face {
+            font-family: "timeFont";
+            src: url(img/Horsham-Serial-Bold 2.ttf) format("truetype");
+        }
+
+        .logo-text { 
+            font-family: "timeFont";
+        }
+
+        h3 {
+            padding: 10px;
+            text-align: center;
+            margin: auto;
+            background-color: #2980B9;
+            color: #fff;
+            padding: 26px;
+            margin-bottom: 30px;
+        }
+
+        .form-content {
+            background-color: #fff;
+            margin: auto;
+            width: 70%;
+            -webkit-box-shadow: 10px 10px 19px -5px rgba(0,0,0,1);
+            -moz-box-shadow: 10px 10px 19px -5px rgba(0,0,0,1);
+            box-shadow: 10px 10px 19px -5px rgba(0,0,0,1);
+            margin-top: 40px;
+            border: 1px solid #e9e9e9;
+        }
+
+        body {
+            background-color: #ffffff;
+        }
+
+        .logo-banner {
+            height: 121px;
+            background-color: #FCFEFF;
+            -webkit-box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+            box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+        }
+
+        .logo-text {
+            display: inline-block;
+            font-size: 59px;
+            padding: 20px 25px;
+            font-weight: bold;
+            color: #25A7DD;
+        }
+
+        input.text-button {
+            background-color: #fff;
+            color: #25A7DD;
+            height: auto;
+            padding-left: 15px;
+            outline: none;
+        }
+
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="logo-banner">
+    <form class="form-horizontal" action="displaydashboard" method="post" enctype="multipart/form-data">
+        <input class="logo-text text-button" type="submit" name="" id="fetchCanVendorMap" value="Time Inc.">
+    </form>
+</div>
+
+<div class="container">
+    <div class="row">
+         <form class="form-horizontal" action="sendOPDetails" method="post" enctype="multipart/form-data">
+            <fieldset class="form-content">
+                <!-- Address form -->
+         
+                <h3>Please Enter Information for the Available Positions</h3>
+
+                <!-- Title input-->
+                <div class="control-group">
+                    <label class="control-label">Title:</label>
+                    <div class="controls">
+                        <select required id="title" name="title" class="input-xlarge form-control">
+                                                  
+                        </select>
+                    </div>
+                </div>
+         
+                <!-- fTechnology input-->
+                <div class="control-group">
+                    <label class="control-label">Technology:</label>
+                    <div class="controls">
+                        <select required id="technology" name="technology" class="input-xlarge form-control">
+                            
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Job Description input-->
+                <div class="control-group">
+                    <label class="control-label">Enter the Job Description:</label>
+                    <div class="controls">
+                        <textarea required class="form-control input-xlarg" name="jobDesc" id="jobDesc"></textarea>
+                    </div>
+                </div>
+
+                <!-- Specific Skills input-->
+                <div class="control-group">
+                    <label class="control-label">Enter Specific Skills:</label>
+                    <div class="controls">
+                        <button id="addSkillsButton" type="button" class="btn btn-default">Add Skills</button>
+                        <div id="addSkillsContainer"></div>
+                    </div>
+                </div>
+
+
+                <!-- NY input-->
+                 <div class="control-group">
+                    <label class="control-label">NY Manager</label>
+                    <div class="controls ">
+                        <select required id="NYMgr" name="NYMgr" class="input-xlarge form-control">
+                                          
+                        </select>
+                    </div>
+                </div>
+
+                <!-- open positions input-->
+                <div class="control-group">
+                    <label class="control-label">Enter the open Positions:</label>
+                    <div class="controls">
+                        <input required id="positionCheck" name="positionCheck" type="number" placeholder="open positions"
+                        class="input-xlarge form-control" />
+                    </div>
+                </div>
+
+                <!-- Availability input-->
+                 <div class="control-group">
+                    <label class="control-label">Availability:</label>
+                    <div class="controls ">
+                        <select required id="availability" name="availability" class="input-xlarge form-control">
+                            
+                        </select>
+                    </div>
+                </div>
+
+                <!-- WorkDay input-->
+                <div class="control-group">
+                    <label class="control-label">Workday:</label>
+                    <div class="controls">
+                        <textarea class="form-control input-xlarg" name="workday" id="workday"></textarea>
+                    </div>
+                </div>
+
+                <!-- GreenHouse input-->
+                <div class="control-group">
+                    <label class="control-label">Green House:</label>
+                    <div class="controls">
+                        <textarea class="form-control input-xlarg" name="greenhouse" id="greenhouse"></textarea>
+                    </div>
+                </div>
+
+                <!-- submit input-->
+                <div class="control-group">
+                    <div class="controls">
+                        <input type="submit" name="" id="Submit" value="SUBMIT" onclick ="addValues();">
+                        <input type="button" name="" id="getReport" value="REPORT" onclick ="generateReport();">
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+
+        <div class="openPositionsReport" style="display:none;">
+                <span class='closeButton glyphicon glyphicon-remove' onclick='closePopUp(this,"openPositionsReport");'></span>
+
+                <table class="table second-level-table table-striped">
+                    <thead>
+                        <tr style="background-color: #46AFF2; color: #fff; font-size: 14px;">
+                            <th>Technology</th>
+                            <th>Title</th>
+                            <th>NY Manager</th>
+                            <th>Job Description</th>
+                            <th>Open Positions</th>
+                            <th>Availability</th>
+                            <th>Work Day</th>
+                            <th>Green House</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="openPositionSummary">
+                       
+                    </tbody>
+                </table>
+            </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var getConfigData = JSON.parse(configJSON);
+
+    $(document).ready(function(){
+        var data = "<tr>";
+        var configAvailability = '<option value="" selected="selected">please enter the availability</option>';
+        var configTechnology = '<option value="" selected="selected">please select a Technology</option>';
+        var configTitle = '<option value="" selected="selected">please select a level</option>';
+        var configManager = '<option value="" selected="selected">please select a Name</option>';
+
+        for (var key2 in getConfigData.availability) {
+            configAvailability += "<option value='"+getConfigData.availability[key2]+"'>"+getConfigData.availability[key2]+"</option>";
+        }
+        $('#availability').html(configAvailability);
+
+
+
+        for (var key3 in getConfigData.technology) {
+            configTechnology += "<option value='"+getConfigData.technology[key3]+"'>"+getConfigData.technology[key3]+"</option>";
+        }
+        $('#technology').html(configTechnology);
+
+
+        for (var key4 in getConfigData.manager) {
+            configManager += "<option value='"+getConfigData.manager[key4]+"'>"+getConfigData.manager[key4]+"</option>";
+        }
+        $('#NYMgr').html(configManager);
+
+
+        for (var key5 in getConfigData.title) {
+            configTitle += "<option value='"+getConfigData.title[key5]+"'>"+getConfigData.title[key5]+"</option>";
+        }
+        $('#title').html(configTitle);
+
+        $('#addSkillsButton').on('click', function() {
+            $("#addSkillsContainer").append('<div class="NScontainer"><input type="text" class="newSkill input-xlarge" value="" /><select class="newSkillPriority" class="input-xlarge"><option value="" selected="selected">priority</option><option value="M">Mandatory</option><option value="N">Not Mandatory</option></select><span class="closeButtonSkill glyphicon glyphicon-remove" onclick="closePopUpSkill(this);"></span></div>');
+        });
+
+        (function($) {
+            $.fn.goTo = function() {
+                $('html, body').animate({
+                    scrollTop: $(this).offset().top + 'px'
+                }, 'fast');
+                return this; // for chaining...
+            }
+        })(jQuery);
+
+        var openPositionsArr = JSON.parse(openPositionsJSON);
+
+        for (var key in openPositionsArr) {
+
+            data += "<td>"+openPositionsArr[key].technology+"</td><td>"+openPositionsArr[key].title+"</td><td>"+openPositionsArr[key].NYMgr+"</td><td>"+openPositionsArr[key].jobDesc+"</td><td>"+openPositionsArr[key].positionCheck+"</td><td>"+openPositionsArr[key].availability+"</td><td>"+openPositionsArr[key].workday+"</td><td>"+openPositionsArr[key].greenhouse+"</td>";
+
+            data += "</tr><tr>";
+        }
+        $('.openPositionSummary').html(data);
+    });
+
+    function addValues() {
+       $('input.newSkill').each(function(e,i) {
+            var newVal = $(this).val() +":"+ $(this).next().val();
+            var id='skill'+parseInt(e+1);
+            $(this).attr('value',newVal);
+            $(this).attr('name',id);
+            $(this).val(newVal);
+
+            $(this).next().val('');
+            $(this).next().attr('value','');
+
+       }); 
+       var JD = $('#jobDesc').val().replace(/\n/g, ' ');
+       var WD = $('#workday').val().replace(/\n/g, ' ');
+       var GH = $('#greenhouse').val().replace(/\n/g, ' ');
+       
+       $('#jobDesc').val(JD).attr('value',JD);
+       $('#workday').val(WD).attr('value',WD);
+       $('#greenhouse').val(GH).attr('value',GH);
+    }
+
+    function closePopUp(e) {
+        $(e).parents('.openPositionsReport').hide();
+    }
+
+    function closePopUpSkill(e) {
+        $(e).parents('.NScontainer').hide();
+    }
+
+    function generateReport() {
+        $('.openPositionsReport').show().goTo();
+    }
+
+</script>
+</body>
+</html>

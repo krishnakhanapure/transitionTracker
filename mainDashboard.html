@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
+    <title>Login Form</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <style type="text/css">
+        @font-face {
+            font-family: "timeFont";
+            src: url(img/Horsham-Serial-Bold 2.ttf) format("truetype");
+        }
+
+        .logo-text { 
+            font-family: "timeFont";
+        }
+
+        .totalSummary {
+            padding: 10px 0px;
+            margin: 0px 0px 20px 0px;
+        }
+
+        .totalSummary span {
+            font-size: 15px;
+        }
+
+        .totalSummary .totalPositions, .totalSummary .filledPositions, .totalSummary .remainingPositions {
+            font-weight: bold;
+            font-size: 47px;
+        }
+
+        .data-summary-table {
+            border-bottom: 1px solid #ddd;
+            border-left: 1px solid #ddd;
+            font-weight: bold;
+            color: #6B7175;
+        }
+
+        .data-summary-table th, .data-summary-table td {
+            text-align: center;
+        }
+
+        .data-summary-table td {
+            border-right: 1px solid #ddd;
+        }
+
+        .logo-banner {
+            height: 121px;
+            background-color: #FCFEFF;
+            -webkit-box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+            box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+        }
+
+        form {
+            margin: 0px;
+            float: left;
+            margin-right: 5px;
+        }
+
+        .button-section {
+            margin: 30px 0px;
+            height: 40px;
+        }
+
+        .table-striped tbody>tr:nth-child(even)>td, .table-striped tbody>tr:nth-child(even)>th {
+            background-color: #E9E9E9 !important; 
+        }
+
+        .table-striped tbody>tr:nth-child(odd)>td, .table-striped tbody>tr:nth-child(odd)>th {
+            background-color: #FFFFFF !important; 
+        }
+
+        .logo-text {
+            display: inline-block;
+            font-size: 59px;
+            padding: 20px 25px;
+            font-weight: bold;
+            color: #25A7DD;
+        }
+
+        a, .getOfferSelectedCount {
+            text-decoration: underline;
+            cursor: pointer;
+            color: #1F6294;
+        }
+
+        input[type="submit"] {
+            background-color: #2980B9;
+            border: #2980B9;
+            color: #fff;
+            text-shadow: none;
+            padding: 9px;
+            border-radius: 0px;
+            height: 50px;
+            border-right: 1px solid #fff;
+        }
+
+        .firstLevelDetail span {
+            display: inline-block;
+            width: 50%;
+            padding: 10px;
+            border-right: 1px solid #D3EBEB; 
+            border-bottom: 1px solid #D3EBEB; 
+        }
+
+        .firstLevelDetail .title {
+            background-color: #2577B5;
+            color: #fff;
+            border-right: 0px;
+            text-align: center;
+        }
+
+        .firstSpan {
+            border-left: 1px solid #D3EBEB; 
+        }
+
+        .techPopup, .secondLevelDetail, .offerCandidateDetails {
+            padding: 20px;
+            width: 98%;
+            margin-bottom: 10px;
+            position: relative;
+            left: 2%;
+            display: none;
+        }
+
+        .techPopup h4 {
+            text-align: center;
+        }
+
+        span.closeButton {
+            display: inline;
+            border: none;
+            position: relative;
+            left: 98%;
+            padding: 0px;
+            color: #fff;
+            top: 23px;
+        }
+
+        .secondLevelDetail {
+            margin: 20px 0px;
+            position: relative;
+            left: 3%;
+            width: 97%;
+        }
+
+        .second-level-table {
+            border: 1px solid #D3EBEB;
+            border-top: 0px;
+        }
+
+        .summaryNos {
+            height: 96px;
+            background-color: #E84C3D;
+            border-radius: 3px;
+            color: #fff;
+            font-family: sans-serif;
+            -webkit-box-shadow: 10px 11px 22px -7px rgba(0,0,0,0.75);
+            -moz-box-shadow: 10px 11px 22px -7px rgba(0,0,0,0.75);
+            box-shadow: 10px 11px 22px -7px rgba(0,0,0,0.75);
+            padding: 10px;
+            margin-right: 28px;
+        }
+
+        .greenBox {
+            background-color: #29AD61;
+        }
+
+        .yellowBox {
+            background-color: #F0AD4E;
+        }
+
+        .headingText {
+            margin: 0px 0px 21px 0px;
+        }
+
+        .headingText h2, .tableHeading {
+            margin: 0px;
+        }
+
+        .headingText span {
+            color: #6C7378;
+        }
+
+        .tableHeading > div{
+            text-align: center;
+            font-size: 16px;
+            padding: 12px;
+            background-color: #2577B5;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .techPopup h5, .secondLevelDetail h5 {
+            margin: 0px;
+            padding: 10px;
+            background-color: #2577B5;
+            color: #fff;
+            text-align: center;
+        }
+
+        input.text-button {
+            background-color: #fff;
+            color: #25A7DD;
+            height: auto;
+            padding-left: 15px;
+            outline: none;
+        }
+
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.totalPositions').html(totalOpenPositions);
+            $('.filledPositions').html(totalCountDisplay);
+            var remainingSlots = parseInt(totalOpenPositions-totalCountDisplay);
+
+            if(remainingSlots <= 0 ) {
+                $('.remainingPositions').html(0);
+            }else {
+               $('.remainingPositions').html(remainingSlots); 
+            }
+            
+
+            tableJSON = JSON.parse(tableData);
+            table2JSON = JSON.parse(tableData2);
+            techClickData2 = JSON.parse(techClickData);
+            detailOpenPositions = JSON.parse(openTitlePositions);
+            secLevelDataJSON = JSON.parse(secLevelData);
+            OfferedNumber = JSON.parse(totalPositionsOffered);
+
+            var tableRow = "<tr>";
+            var firstOverlay = "";
+
+            for (var key in tableJSON) {
+              if (tableJSON.hasOwnProperty(key)) {
+                var techSel = JSON.stringify(tableJSON[key]._id);
+                tableRow += '<td><a class="technologyName">'+tableJSON[key]._id+'</a></td><td>'+tableJSON[key].positionCheckCount+'</td>';
+
+                firstOverlay += "<div class='techPopup' for='"+tableJSON[key]._id+"'><div><span class='closeButton glyphicon glyphicon-remove' onclick='closePopUp(this);'></span><h5>List of VPs for "+tableJSON[key]._id+" and positions open under them</h5><span class='title'>Technology Managers</span><span class='title'>Open Positions</span></div></div>";
+                
+                for (var key2 in table2JSON) {
+
+                    if(tableJSON[key]._id == table2JSON[key2]._id) {
+                        tableRow += '<td>'+table2JSON[key2].testClear+'</td><td>'+table2JSON[key2].firstClear+'</td><td>'+table2JSON[key2].secondClear+'</td><td>'+table2JSON[key2].HRClear+'</td><td>'+table2JSON[key2].SHClear+'</td><td class="getOfferSelectedCount" for="'+tableJSON[key]._id+'" onclick="showOfferDetails(this);">'+0+'</td>';
+                    }
+                }
+
+
+
+              }
+
+              tableRow += '</tr>';
+            }
+
+            $('.SummaryBody').html(tableRow);
+            $('.firstLevelDetail').html(firstOverlay);
+
+            $('.SummaryBody tr').each( function( index, element ){
+                if($(this).find('td').length == 2) {
+                    var tech = $($(this).find('td')[0]).text();
+                    console.log(tech);
+                   $(this).append("<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td for='"+tech+"' class='getOfferSelectedCount'>0</td>"); 
+                }
+            });
+
+            for (var key3 in techClickData2) {
+
+                var firstLevelData = "";
+                firstLevelData += $('.firstLevelDetail div[for="'+techClickData2[key3]._id["technology"]+'"]').html();
+                firstLevelData += "<div><span class='firstSpan'><a for='"+techClickData2[key3]._id["technology"]+"' onclick='openCandidatesDetails(this);'>"+techClickData2[key3]._id["manager"]+"</a></span><span>"+techClickData2[key3].totalValue+"</span></div>";
+
+                $('.firstLevelDetail div[for="'+techClickData2[key3]._id["technology"]+'"]').html(firstLevelData);
+            }
+
+            for (var key6 in OfferedNumber) {
+
+                $('td.getOfferSelectedCount[for="'+OfferedNumber[key6]._id+'"]').text(OfferedNumber[key6].totalOffered).attr('onclick', "showOfferDetails(this)");
+            }
+
+            $('.technologyName').on('click', function() {
+                $('.techPopup').hide();
+                $('.offerCandidateDetails').show().goTo();
+                var techSelected = $(this).text();
+                $('.firstLevelDetail div[for="'+techSelected+'"]').show();
+                $('.offerCandidateDetails').hide();
+                $('.secondLevelDetail').hide();
+            });
+
+            (function($) {
+                $.fn.goTo = function() {
+                    $('html, body').animate({
+                        scrollTop: $(this).offset().top + 'px'
+                    }, 'fast');
+                    return this; // for chaining...
+                }
+            })(jQuery);
+
+        });
+
+        function closePopUp(e) {
+            $(e).parents('div.techPopup').hide();
+        }
+
+        function closePopUp2(e) {
+            $(e).parents('div.secondLevelDetail').hide();
+        }
+
+        function closePopUp3(e) {
+            $(e).parents('div.offerCandidateDetails').hide();
+        }
+
+        function openCandidatesDetails(item) {
+            var manager = $(item).text();
+            var technologyCheck = $(item).attr('for');
+            var data = "<tr>";
+
+            for (var key4 in detailOpenPositions) {
+
+                if(detailOpenPositions[key4]._id["manager"] == manager && detailOpenPositions[key4]._id["technology"] == technologyCheck) {
+                    
+                    data += "<td>"+detailOpenPositions[key4]._id["title"]+"</td><td>"+detailOpenPositions[key4].totalValue+"</td>";
+                }
+                data += "</tr><tr>";
+            }
+            
+            $('.secSummary').html(data);
+            $('.secondLevelDetail').show().goTo();
+            $('.offerCandidateDetails').hide();
+        }
+
+        function showOfferDetails(en) {
+            var technologyCheck = $(en).attr('for');
+            var data = "<tr>";
+
+            for (var key5 in secLevelDataJSON) {
+
+                if(secLevelDataJSON[key5].technology == technologyCheck) {
+                    
+                    data += "<td>"+secLevelDataJSON[key5].candidateName+"</td><td>"+secLevelDataJSON[key5].title+"</td><td>"+secLevelDataJSON[key5].doj+"</td>";
+                }
+                data += "</tr><tr>";
+            }
+
+            $('.techPopup').hide();
+            $('.secondLevelDetail').hide();
+            $('.offerSummary').html(data);
+            $('.offerCandidateDetails').show().goTo();
+        }
+
+    </script>
+
+</head>
+<body>
+     <div class="logo-banner">
+        <form class="form-horizontal" action="displaydashboard" method="post" enctype="multipart/form-data">
+            <input class="logo-text text-button" type="submit" name="" id="fetchCanVendorMap" value="Time Inc.">
+        </form>
+    </div>
+
+    <div class="container" style="width: 90%;">
+
+        <div class="row">
+            <div class="col-lg-6"></div>
+            <div class="col-lg-6 button-section">
+                <!-- <form class="form-horizontal pull-right" action="fetchVendorMapPage" method="post" enctype="multipart/form-data">
+                    <input class="btn" type="submit" name="" id="fetchCanVendorMap" value="Map Vendor Candidate">
+                </form> -->
+                <form class="form-horizontal pull-right" action="uploadVendor" method="post" enctype="multipart/form-data">
+                    <input class="btn" type="submit" name="" id="uploadVendor" value="Vendor Screen">
+                </form>
+                <form class="form-horizontal pull-right" action="getOfferScreen" method="post" enctype="multipart/form-data">
+                    <input class="btn" type="submit" name="" id="getOfferScreen" value="HR Screen">
+                </form>
+                <form class="form-horizontal pull-right" action="getOpenPositions" method="post" enctype="multipart/form-data">
+                    <input class="btn " type="submit" name="" id="getOpenPositions" value="Add Positions">
+                </form>
+            </div>
+        </div>
+
+        <div class="row headingText">
+            <h2>Dashboard</h2>
+            <span>Summary on the hiring status for Globalisation:</span>
+        </div>
+
+        <div class="dispaly totalSummary row">
+            <div class="col-lg-2 summaryNos">
+                <span>Total Open Positions: </span><br/>
+                <span class="totalPositions"></span>
+            </div>
+            <div class="col-lg-2 summaryNos greenBox">
+                <span>Total positions Filled: </span><br/>
+                <span class="filledPositions"></span>
+            </div>
+            <div class="col-lg-2 summaryNos yellowBox">
+                <span>Total Positions Remaining: </span><br/>
+                <span class="remainingPositions"></span>
+            </div>
+        </div>
+
+        <div class="row tableHeading"><div class="col-lg-12">Detailed Info on Rounds for each Technology</div></div>
+        <table class="table table-striped data-summary-table">
+            <thead>
+                <tr style="background-color: #2577B5; color: #fff; font-size: 14px;">
+                    <th>Technology</th>
+                    <th>Open Position</th>
+                    <th>Cleared Test</th>
+                    <th>Cleared 1st Round</th>
+                    <th>Cleared 2nd Round</th>
+                    <th>Cleared HR Round</th>
+                    <th>Cleared StakeHolder Round</th>
+                    <th>Offer Released</th>
+                </tr>
+            </thead>
+            <tbody class="SummaryBody">
+               
+            </tbody>
+        </table>
+
+        <div class="firstLevelDetail"></div>
+
+        <div class="offerCandidateDetails" style="display:none;">
+            <span class='closeButton glyphicon glyphicon-remove' onclick='closePopUp3(this);'></span>
+
+            <table class="table second-level-table" border="1">
+                <thead>
+                    <tr style="background-color: #2577B5; color: #fff; font-size: 14px;">
+                        <th>Candidate Name</th>
+                        <th>Candidate Title</th>
+                        <th>Candidate DOJ</th>
+                    </tr>
+                </thead>
+                <tbody class="offerSummary">
+                   
+                </tbody>
+            </table>
+        </div>
+
+        <div class="secondLevelDetail" style="display:none;">
+            
+            <span class='closeButton glyphicon glyphicon-remove' onclick='closePopUp2(this);'></span>
+            <h5>List of positions open for each title under specific VP:</h5>
+            <table class="table second-level-table" border="1">
+                <thead>
+                    <tr style="background-color: #2577B5; color: #fff; font-size: 14px;">
+                        <th>Title</th>
+                        <th>Open Positions</th>
+                    </tr>
+                </thead>
+                <tbody class="secSummary">
+                   
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+</body>
+</html>                                		

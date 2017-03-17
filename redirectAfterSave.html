@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Success Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+
+        #addSkillsContainer {
+                margin: 10px 0px;
+        }
+
+        .newSkill {
+            margin-right: 5px;
+            width: 20%;
+        }
+
+        .newSkillPriority {
+            width: 12%;
+        }
+
+        .NScontainer {
+            margin-bottom: 8px;
+        }
+        .container {
+            margin-top: 3%;
+        }
+
+        input[type="submit"], input[type="button"] {
+            background-color: #2980B9;
+            border: #2980B9;
+            color: #fff;
+            text-shadow: none;
+            padding: 9px;
+        }
+
+        input[type="text"],input[type="number"],input[type="email"],input[type="date"], select {
+            height: 43px !important;
+        }
+
+        .form-control {
+            width: 90%;
+        }
+
+        .closeButton {
+            padding-left: 7px;
+        }
+
+        .control-label {
+            width: 29% !important;
+            margin-right: 25px;
+        }
+
+        .controls {
+            margin-left: 31% !important;
+        }
+
+        .closeButton {
+            left: 97%;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+
+        .logo-banner {
+            height: 121px;
+            background-color: #FCFEFF;
+            -webkit-box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+            box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+        }
+
+        .logo-text {
+            display: inline-block;
+            font-size: 59px;
+            padding: 20px 25px;
+            font-weight: bold;
+            color: #25A7DD;
+        }
+
+        @font-face {
+            font-family: "timeFont";
+            src: url(img/Horsham-Serial-Bold 2.ttf) format("truetype");
+        }
+
+        .logo-text { 
+            font-family: "timeFont";
+        }
+
+        h3 {
+            padding: 10px;
+            text-align: center;
+            margin: auto;
+            background-color: #2980B9;
+            color: #fff;
+            padding: 26px;
+            margin-bottom: 30px;
+        }
+
+        .form-content {
+            background-color: #fff;
+            margin: auto;
+            width: 50%;
+            -webkit-box-shadow: 10px 10px 19px -5px rgba(0,0,0,1);
+            -moz-box-shadow: 10px 10px 19px -5px rgba(0,0,0,1);
+            box-shadow: 10px 10px 19px -5px rgba(0,0,0,1);
+            border: 1px solid #e9e9e9;
+        }
+
+        body {
+            background-color: #ffffff;
+        }
+
+        .successText {
+            text-align: center;
+            font-size: 19px;
+            padding: 13px;
+            font-weight: bold;
+            color: #29AD61;
+        }
+
+        .btn-default {
+            color: #fff;
+            background-color: #2980B9;
+            border-color: #2980B9;
+            margin: auto;
+            border-radius: 0px;
+        }
+
+        .modal-footer {
+            padding: 0px 10px 10px 0px;
+            text-align: right;
+            border-top : none;
+        }
+
+        input.text-button {
+            background-color: #fff;
+            color: #25A7DD;
+            height: auto;
+            padding-left: 15px;
+            outline: none;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="logo-banner">
+    <form class="form-horizontal" action="displaydashboard" method="post" enctype="multipart/form-data">
+        <input class="logo-text text-button" type="submit" name="" id="fetchCanVendorMap" value="Time Inc.">
+    </form>
+</div>
+
+    <div class="container">
+        <form id="appendAction" action="" method="post" enctype="multipart/form-data">
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    
+                    <div class="modal-body">
+                      <p class="successText">Data is Saved Successfully!!!</p>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" id="redirectPage" class="btn btn-default" data-dismiss="">Go Back to Page</button>
+                    </div>
+                  </div>
+                  
+                </div>
+            </div>
+        </form>
+
+        <div class="row" style="display:none;">
+              <button type="button" id="showPopUp" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"></button>
+        </div>
+    </div>
+
+    
+<script type="text/javascript">
+    var actionReceived = actionSent;
+
+    $(document).ready(function() {
+        $('#appendAction').attr('action', actionReceived);
+        $('#showPopUp').click();
+    });
+   
+</script>
+</body>
+</html>

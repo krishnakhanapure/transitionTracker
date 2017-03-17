@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!-- This file has been downloaded from Bootsnipp.com. Enjoy! -->
+    <title>Map Vendor Candidate Form</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <style type="text/css">
+
+            .container {
+                margin-top: 3%;
+            }
+
+            .detailsTitle {
+                width: 12%;
+                display: inline-block;
+                text-align: right;
+                margin: 0px 10px 10px 0px;
+            }
+
+            .detailsValue {
+                display: inline-block;
+                text-align: right;
+                margin: 0px 10px 10px 0px;
+                font-weight: bold;
+            }
+
+            input[type="submit"], input[type="button"]{
+                background-color: #2980B9;
+                border: #2980B9;
+                color: #fff;
+                text-shadow: none;
+                padding: 9px;
+            }
+
+            input[type="text"],input[type="number"],input[type="email"],input[type="date"], select {
+                height: 40px !important;
+            }
+
+            .form-control {
+                width: 50%;
+            }
+
+            .closeButton {
+                left: 98%;
+                margin-bottom: 11px;
+                cursor: pointer;
+            }
+
+            @font-face {
+            font-family: "timeFont";
+            src: url(img/Horsham-Serial-Bold 2.ttf) format("truetype");
+        }
+
+        .logo-text { 
+            font-family: "timeFont";
+        }
+
+        h3 {
+            padding: 10px;
+            text-align: center;
+            margin: auto;
+            background-color: #2980B9;
+            color: #fff;
+            padding: 26px;
+            margin-bottom: 30px;
+        }
+
+        .form-content {
+            background-color: #fff;
+            margin: auto;
+            width: 70%;
+            -webkit-box-shadow: 10px 10px 19px -5px rgba(0,0,0,1);
+            -moz-box-shadow: 10px 10px 19px -5px rgba(0,0,0,1);
+            box-shadow: 10px 10px 19px -5px rgba(0,0,0,1);
+            margin-top: 40px;
+            border: 1px solid #e9e9e9;
+        }
+
+        body {
+            background-color: #ffffff;
+        }
+
+        .logo-banner {
+            height: 121px;
+            background-color: #FCFEFF;
+            -webkit-box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+            -moz-box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+            box-shadow: 0px 4px 31px -10px rgba(0,0,0,0.75);
+        }
+
+        .logo-text {
+            display: inline-block;
+            font-size: 59px;
+            padding: 20px 25px;
+            font-weight: bold;
+            color: #25A7DD;
+        }
+
+        input.text-button {
+            background-color: #fff;
+            color: #25A7DD;
+            height: auto;
+            padding-left: 15px;
+            outline: none;
+        }
+        </style>
+
+        <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+        <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
+        <script type="text/javascript">
+        $(window).load(function() {
+            jsonToParse = JSON.parse(JSONData);
+            mapReportListJSON = JSON.parse(mapReportList);
+            managerConfigJSON = JSON.parse(managerConfig);
+
+            var optionsList = '';
+            var managerList = '<option value="" selected="selected">please select a Name</option>';
+            var data = "<tr>";
+            var data2 = "<tr>";
+            var checkMapped = false;
+
+            for (var key in jsonToParse) {
+                for(var keySec in mapReportListJSON) {
+                    if(jsonToParse[key].candidateName == mapReportListJSON[keySec].candidateList) {
+                        checkMapped = true;
+                        break;
+                    }else {
+                        checkMapped = false;
+                    }
+                }
+                if(!checkMapped) {
+                    checkMapped = false;
+                    optionsList += '<option value="'+jsonToParse[key].candidateName+'">'+jsonToParse[key].candidateName+'</option>';
+                }
+            }
+
+            if(optionsList != ""){
+                optionsList = '<option value="" selected="selected">Please select a Candidate</option>'+optionsList;
+
+            }else {
+                optionsList = '<option>No Candidates To Map</option>';
+            }
+            $('#candidateList').html(optionsList);
+
+
+            for (var key3 in managerConfigJSON.manager) {
+                managerList += '<option value="'+managerConfigJSON.manager[key3]+'">'+managerConfigJSON.manager[key3]+'</option>';
+
+            }
+
+            $('#VpName').html(managerList);
+
+
+            for (var key2 in mapReportListJSON) {
+
+                if(mapReportListJSON[key2].backfillPosition == "Yes") {
+
+                    data += "<td>"+mapReportListJSON[key2].candidateList+"</td><td>"+mapReportListJSON[key2].candidateTechnology+"</td><td>"+mapReportListJSON[key2].candidateTitle+"</td><td>"+mapReportListJSON[key2].candidateDOJ+"</td><td>"+mapReportListJSON[key2].vendorStaff+"</td><td>"+mapReportListJSON[key2].VpName+"</td>";
+
+                    data += "</tr><tr>";
+
+                }else {
+
+                    data2 += "<td>"+mapReportListJSON[key2].candidateList+"</td><td>"+mapReportListJSON[key2].candidateTechnology+"</td><td>"+mapReportListJSON[key2].candidateTitle+"</td><td>"+mapReportListJSON[key2].candidateDOJ+"</td><td>"+mapReportListJSON[key2].vendorStaff+"</td><td>"+mapReportListJSON[key2].VpName+"</td>";
+
+                    data2 += "</tr><tr>";
+
+                }
+            }
+            $('.CanVendorMapSummary').html(data);
+            $('.CanVendorMapBackFillSummary').html(data2);
+
+            (function($) {
+                $.fn.goTo = function() {
+                    $('html, body').animate({
+                        scrollTop: $(this).offset().top + 'px'
+                    }, 'fast');
+                    return this; // for chaining...
+                }
+            })(jQuery);
+            
+        });
+
+        function populateCanDetails() {
+            for (var key in jsonToParse) {
+              if (jsonToParse.hasOwnProperty(key)) {
+                if(jsonToParse[key].candidateName == $('#candidateList').val()) {
+                    $('#canTech').html(jsonToParse[key].technology);
+                    $('#canTitle').html(jsonToParse[key].title);
+                    $('#canDOJ').html(jsonToParse[key].doj);
+
+                    $('#candidateTechnology').val(jsonToParse[key].technology).attr('value',jsonToParse[key].technology);
+                    $('#candidateTitle').val(jsonToParse[key].title).attr('value',jsonToParse[key].title);
+                    $('#candidateDOJ').val(jsonToParse[key].doj).attr('value',jsonToParse[key].doj);
+                }
+              }
+            }
+
+            $('.displayDetails').show();
+        }
+
+        function populateVendor(managerSelected) {
+            vendorjsonToParse = JSON.parse(vendorJSONData);
+            var vendorOptionsList = '<option value="" selected="selected">(please select a Vendor Staff)</option>';
+            var checkMappedStaff = false;
+
+            for (var key in vendorjsonToParse) {
+              if (vendorjsonToParse[key].VpName == managerSelected) {
+
+                for(var keyin in mapReportListJSON) {
+
+                    if(vendorjsonToParse[key].staffName == mapReportListJSON[keyin].vendorStaff) {
+                        checkMappedStaff = true;
+                        break;
+                    }else {
+                        checkMappedStaff = false;
+                    }
+                }
+
+                if(!checkMappedStaff) {
+                    checkMappedStaff = false;
+                    vendorOptionsList += '<option value="'+vendorjsonToParse[key].staffName+'">'+vendorjsonToParse[key].staffName+'</option>';                
+                }
+
+              }
+            }
+
+            $('#vendorStaff').html(vendorOptionsList);
+        }
+
+        function getReport() {
+            $('.VendorMapReportBackFill').hide();
+            $('.VendorMapReport').show().goTo();     
+        }
+
+        function getBackFillReport() {
+            $('.VendorMapReport').hide();
+            $('.VendorMapReportBackFill').show().goTo();
+        }
+
+        function closePopUp(tableName) {
+            $('.'+tableName).hide();
+        }
+
+    </script>
+    
+</head>
+
+<body>
+
+<div class="logo-banner">
+    <form class="form-horizontal" action="displaydashboard" method="post" enctype="multipart/form-data">
+        <input class="logo-text text-button" type="submit" name="" id="fetchCanVendorMap" value="Time Inc.">
+    </form>
+</div>
+
+<div class="container">
+    <div class="row">
+         <form class="form-horizontal" action="mapVendorCanDetails" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="candidateTechnology" id="candidateTechnology" value="" />
+            <input type="hidden" name="candidateTitle" id="candidateTitle" value="" />
+            <input type="hidden" name="candidateDOJ" id="candidateDOJ" value="" />
+
+            <fieldset class="form-content">
+                <!-- Address form -->
+         
+                <h3>Map the Candidate with Vendor</h3>
+
+                <!-- Candidate Name input-->
+                <div class="control-group">
+                    <label class="control-label">List of Candidates:</label>
+                    <div class="controls">
+                       <select required id="candidateList" name="candidateList" class="input-xlarge form-control" onchange="populateCanDetails();">
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Candidate details display-->
+                <div class="control-group">
+                    <label class="control-label">Candidates Details:</label>
+                    <div class="controls displayDetails" style="display:none;">
+                       <div><span class="detailsTitle" style="padding-right: 13px; margin-right: 2px;">Technology:</span><span id="canTech" class="detailsValue"></span></div>
+                       <div><span class="detailsTitle">Title:</span><span id="canTitle" class="detailsValue"></span></div>
+                       <div><span class="detailsTitle">D.O.J:</span><span id="canDOJ" class="detailsValue"></span></div>
+                    </div>
+                </div>
+
+                <!-- NY input-->
+                 <div class="control-group">
+                    <label class="control-label ">VP Name:</label>
+                    <div class="controls">
+                        <select required id="VpName" name="VpName" class="form-control input-xlarge" onchange="populateVendor(this.value);">
+                        
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Vendor Staff input-->
+                <div class="control-group">
+                    <label class="control-label">Vendor Staff:</label>
+                    <div class="controls">
+                        <select required id="vendorStaff" name="vendorStaff" class="input-xlarge form-control">
+                        </select>
+                    </div>
+                </div>
+
+
+                <!--  Backfill position input-->
+                <div class="control-group">
+                    <label class="control-label"></label>
+                    <div class="controls">
+                        <input class="btn" type="checkbox" name="backfillPosition" id="backfillPosition" value="Yes" /> Moved out of vendor transition
+                    </div>
+                </div>
+
+                <!-- submit input-->
+                <div class="control-group">
+                    <div class="controls">
+                        <input type="submit" name="" id="MapVendor" value="MAP">
+                        <input type="button" name="" id="getMapVendorBackFill" value="Map Report" onclick="getBackFillReport();">
+                        <input type="button" name="" id="getMapVendor" value="Report for BackFill" onclick="getReport();">
+                        
+                    </div>
+                </div>
+                
+            </fieldset>
+
+        </form>
+
+            <div class="VendorMapReport" style="display:none;">
+                <span class='closeButton glyphicon glyphicon-remove' onclick='closePopUp("VendorMapReport");'></span>
+
+                <table class="table second-level-table table-striped">
+                    <thead>
+                        <tr style="background-color: #46AFF2; color: #fff; font-size: 14px;">
+                            <th>Candidate Name</th>
+                            <th>Candidate Technology</th>
+                            <th>Candidate Title</th>
+                            <th>Candidate DOJ</th>
+                            <th>Vendor Staff</th>
+                            <th>VP Name</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="CanVendorMapSummary">
+                       
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="VendorMapReportBackFill" style="display:none;">
+                <span class='closeButton glyphicon glyphicon-remove' onclick='closePopUp("VendorMapReportBackFill");'></span>
+
+                <table class="table second-level-table table-striped">
+                    <thead>
+                        <tr style="background-color: #46AFF2; color: #fff; font-size: 14px;">
+                            <th>Candidate Name</th>
+                            <th>Candidate Technology</th>
+                            <th>Candidate Title</th>
+                            <th>Candidate DOJ</th>
+                            <th>Vendor Staff</th>
+                            <th>VP Name</th>
+                        </tr>
+                    </thead>
+
+                    <tbody class="CanVendorMapBackFillSummary">
+                       
+                    </tbody>
+                </table>
+            </div>
+    </div>
+</div>
+
+</body>
+</html>
