@@ -41,6 +41,7 @@
 
         input[type="text"],input[type="number"],input[type="email"],input[type="date"], select {
             height: 40px !important;
+            width: 40%;
         }
 
         .form-control {
@@ -58,6 +59,7 @@
 
         .controls {
             margin-left: 31% !important;
+            margin-top: 1%;
         }
 
         .closeButton {
@@ -146,6 +148,30 @@
             font-weight: normal;
         }
 
+        .data-set {
+            background-color: #eee;
+            padding: 7px;
+            margin: 3px 3px 5px 3px;
+            padding-right: 18px;
+            border-radius: 3px;
+            display: inline-block;
+        }
+
+        .glyphicon-remove-circle {
+            left: 8px;
+            top: 2px;
+            cursor: pointer;
+        }
+
+        .btn-default {
+            width: 150px;
+        }
+
+        .control-group {
+            margin: 0 auto;
+            width: 90%;
+        }
+
     </style>
     <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
@@ -171,6 +197,14 @@
             <div>
 
                  <form class="form-horizontal" action="updateConfig" method="post" enctype="multipart/form-data">
+                    <input type="hidden" id="titleConfig" name="titleConfig" value=""/>
+                    <input type="hidden" id="techConfig" name="techConfig" value=""/>
+                    <input type="hidden" id="NYMgrConfig" name="NYMgrConfig" value=""/>
+                    <input type="hidden" id="vendorConfig" name="vendorConfig" value=""/>
+                    <input type="hidden" id="availConfig" name="availConfig" value=""/>
+                    <input type="hidden" id="OfMgrConfig" name="OfMgrConfig" value=""/>
+                    <input type="hidden" id="rowID" name="rowID" value=""/>
+
                     <fieldset class="form-content">
                         <!-- Address form -->
                  
@@ -179,57 +213,71 @@
                         <!-- Title  input-->
                         <div class="control-group">
                             
-                            <label class="control-label">Add Title:</label>
-                            <div class="controls">
-                                <input id="titleConfig" name="titleConfig" type="text" placeholder="Add New Title"
+                            <label class="">Title Information:</label>
+                            <div id="title" class="valuesInfo"></div>
+                            <div class="">
+                                <input id="newTitle" name="" type="text" placeholder="Add New Title"
                                 class="input-xlarge form-control" />
-                                 <p><b>Please add comma seperated Values</b></p>
-
+                                <button type="button" class="addSet btn btn-default">Add Title</button>
                             </div>
                         </div>
 
                         <!-- Manager input-->
                         <div class="control-group">
-                            <label class="control-label">Add NY Manager:</label>
-                            <div class="controls">
-                                <input id="managerConfig" name="managerConfig" type="text" placeholder="NY Manager"
+                            <label class="">Add NY Manager:</label>
+                            <div id="NYMgr" class="valuesInfo"></div>
+                            <div class="">
+                                <input id="newManager" name="" type="text" placeholder="NY Manager"
                                 class="input-xlarge form-control" />
+                                <button type="button" class="addSet btn btn-default">Add Manager</button>
+
                             </div>
                         </div>
 
                         <!-- Candidate Name input-->
                         <div class="control-group">
-                            <label class="control-label">Add Technology:</label>
-                            <div class="controls">
-                                <input id="technologyConfig" name="technologyConfig" type="text" placeholder="Technology"
+                            <label class="">Add Technology:</label>
+                            <div id="technology" class="valuesInfo"></div>
+                            <div class="">
+                                <input id="newTechnology" name="" type="text" placeholder="Technology"
                                 class="input-xlarge form-control" />
+                                <button type="button" class="addSet btn btn-default">Add Technology</button>
+
                             </div>
                         </div>
 
                          <!-- Availability Name input-->
                         <div class="control-group">
-                            <label class="control-label">Add Availability:</label>
-                            <div class="controls">
-                                <input id="availConfig" name="availConfig" type="text" placeholder="Availability"
+                            <label class="">Add Availability:</label>
+                            <div id="availability" class="valuesInfo"></div>
+                            <div class="">
+                                <input id="newAvailability" name="" type="text" placeholder="Availability"
                                 class="input-xlarge form-control" />
+                                <button type="button" class="addSet btn btn-default">Add Availability</button>
+
                             </div>
                         </div>
 
                         <!-- Vendor Name input-->
                         <div class="control-group">
-                            <label class="control-label">Add Vendor:</label>
-                            <div class="controls">
-                                <input id="vendorConfig" name="vendorConfig" type="text" placeholder="Vendor Name"
+                            <label class="">Add Vendor:</label>
+                            <div id="vendor" class="valuesInfo"></div>
+                            <div class="">
+                                <input id="newVendor" name="" type="text" placeholder="Vendor Name"
                                 class="input-xlarge form-control" />
+                                <button type="button" class="addSet btn btn-default">Add Vendor</button>
+
                             </div>
                         </div>
 
                         <!-- offshore Manager input-->
                         <div class="control-group">
-                            <label class="control-label">Add Offshore Manager:</label>
-                            <div class="controls">
-                                <input id="offMgrConfig" name="offMgrConfig" type="text" placeholder="Offshore Manager"
+                            <label class="">Add Offshore Manager:</label>
+                            <div id="offshoreManager" class="valuesInfo"></div>
+                            <div class="">
+                                <input id="newOMnager" name="" type="text" placeholder="Offshore Manager"
                                 class="input-xlarge form-control" />
+                                <button type="button" class="addSet btn btn-default">Add Vendor</button>
                             </div>
                         </div>
 
@@ -237,7 +285,7 @@
                         <div class="control-group">
                             <label class="control-label"></label>
                             <div class="controls">
-                                <input type="submit" name="" id="Submit" value="SUBMIT" />
+                                <input type="submit" name="" id="Submit" value="SUBMIT" onclick="setDataToSend();"/>
                             </div>
                         </div>
 
@@ -259,7 +307,7 @@
                         <div class="control-group">
                             <label class="control-label">Add User Name:</label>
                             <div class="controls">
-                                <input required id="userName" name="name" type="text" placeholder="User Name"
+                                <input style="width: 80%;" required id="userName" name="name" type="text" placeholder="User Name"
                                 class="input-xlarge form-control" />
                             </div>
                         </div>
@@ -282,7 +330,7 @@
                         <div class="control-group">
                             <label class="control-label">Add User Email:</label>
                             <div class="controls">
-                                <input required id="userEmail" name="email" type="email" placeholder="User Email"
+                                <input style="width: 80%;" required id="userEmail" name="email" type="email" placeholder="User Email"
                                 class="input-xlarge form-control" />
                             </div>
                         </div>
@@ -305,7 +353,156 @@
 
 </div>
 <script type="text/javascript">
-    
+    var getConfigData = JSON.parse(configData);
+
+    $(document).ready(function() {
+        
+        var configAvailability = "", configTechnology = "", configManager = "", configTitle = "", offShrMgrConfig = "", vendorArrConfig = "";
+
+        
+            if(getConfigData[0].availConfig != undefined && getConfigData[0].availConfig != "") {
+                var availArr = getConfigData[0].availConfig.split(',');
+
+                for (var key2 in availArr) {
+                    configAvailability += "<span class='data-set'>"+availArr[key2]+"<span class='glyphicon glyphicon-remove-circle'></span></span>";
+                }
+                $('#availability').html(configAvailability);
+
+            }
+
+            if(getConfigData[0].techConfig != undefined && getConfigData[0].techConfig != "") {
+                var techArr = getConfigData[0].techConfig.split(',');
+
+                for (var key3 in techArr) {
+                    configTechnology += "<span class='data-set'>"+techArr[key3]+"<span class='glyphicon glyphicon-remove-circle'></span></span>";
+                }
+                $('#technology').html(configTechnology);
+
+            }
+
+            if(getConfigData[0].NYMgrConfig != undefined && getConfigData[0].NYMgrConfig != "") {
+                var managerArr = getConfigData[0].NYMgrConfig.split(',');
+            
+                for (var key3 in managerArr) {
+                    configManager += "<span class='data-set'>"+managerArr[key3]+"<span class='glyphicon glyphicon-remove-circle'></span></span>";
+                }
+                
+                $('#NYMgr').html(configManager);
+
+            }
+
+            if(getConfigData[0].vendorConfig != undefined && getConfigData[0].vendorConfig != "") {
+                var vendorArr = getConfigData[0].vendorConfig.split(',');
+            
+                for (var key3 in vendorArr) {
+                    vendorArrConfig += "<span class='data-set'>"+vendorArr[key3]+"<span class='glyphicon glyphicon-remove-circle'></span></span>";
+                }
+                $('#vendor').html(vendorArrConfig);
+
+            }
+
+            if(getConfigData[0].titleConfig != undefined && getConfigData[0].titleConfig != "") {
+                var titleArr = getConfigData[0].titleConfig.split(',');
+            
+                for (var key3 in titleArr) {
+                    configTitle += "<span class='data-set'>"+titleArr[key3]+"<span class='glyphicon glyphicon-remove-circle'></span></span>";
+                }
+                $('#title').html(configTitle);
+
+            }
+
+            if(getConfigData[0].OfMgrConfig != undefined && getConfigData[0].OfMgrConfig != "") {
+                var offShrMgrArr = getConfigData[0].OfMgrConfig.split(',');
+            
+                for (var key3 in titleArr) {
+                    offShrMgrConfig += "<span class='data-set'>"+offShrMgrArr[key3]+"<span class='glyphicon glyphicon-remove-circle'></span></span>";
+                }
+                $('#offshoreManager').html(offShrMgrConfig);
+
+            }
+
+        
+
+        $('.addSet').on('click',function() {
+
+            var inputVal = $(this).prev().val();
+            if(inputVal != '') {
+                var divToAdd = "<span class='data-set'>"+inputVal+"<span class='glyphicon glyphicon-remove-circle'></span></span>";
+
+                $(this).parent().prev('div.valuesInfo').append(divToAdd);
+                $(this).prev().val('');
+            }
+        });
+
+        $(document.body).on('click','.glyphicon-remove-circle',function() {
+            $(this).parent().remove();
+        });
+
+    });
+
+    function setDataToSend() {
+        var titletext = "";
+        $('#title .data-set').each(function() {
+            if(titletext == '')
+                titletext += $(this).text();
+            else
+                titletext += ","+$(this).text();
+        });
+        $('#titleConfig').val(titletext).attr('value',titletext);
+
+        var techtext = "";
+        $('#technology .data-set').each(function() {
+            if(techtext == '')
+                techtext += $(this).text();
+            else
+                techtext += ","+$(this).text();
+        });
+        $('#techConfig').val(techtext).attr('value',techtext);
+
+        var NYMtext = "";
+        $('#NYMgr .data-set').each(function() {
+            if(NYMtext == '')
+                NYMtext += $(this).text();
+            else
+                NYMtext += ","+$(this).text();
+        });
+        $('#NYMgrConfig').val(NYMtext).attr('value',NYMtext);
+
+        var availtext = "";
+        $('#availability .data-set').each(function() {
+            if(availtext == '')
+                availtext += $(this).text();
+            else
+                availtext += ","+$(this).text();
+        });
+        $('#availConfig').val(availtext).attr('value',availtext);
+
+        var vendortext = "";
+        $('#vendor .data-set').each(function() {
+            if(vendortext == '')
+                vendortext += $(this).text();
+            else
+                vendortext += ","+$(this).text();
+        });
+        $('#vendorConfig').val(vendortext).attr('value',vendortext);
+
+        var OMtext = "";
+        $('#offshoreManager .data-set').each(function() {
+            if(OMtext == '')
+                OMtext += $(this).text();
+            else
+                OMtext += ","+$(this).text();
+        });
+        $('#OfMgrConfig').val(OMtext).attr('value',OMtext);
+
+        if(getConfigData.length == 0) {
+            $('#rowID').val("0").attr('value','0');
+
+        }else{
+            $('#rowID').val(getConfigData[0]._id).attr(getConfigData[0]._id);
+        }
+    }
+
 </script>
 </body>
 </html>

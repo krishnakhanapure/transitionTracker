@@ -246,57 +246,62 @@
 
         var configManager = '<option value="" selected="selected">please select a Name</option>';
 
-        if(getConfigData[0].availability != undefined) {
-            var availArr = getConfigData[0].availability.split(',');
+        //for(var key in getConfigData) {
 
-            for (var key2 in availArr) {
-                configAvailability += "<option value='"+availArr[key2]+"'>"+availArr[key2]+"</option>";
+            if(getConfigData[0].availConfig != undefined && getConfigData[0].availConfig != "") {
+                var availArr = getConfigData[0].availConfig.split(',');
+
+                for (var key2 in availArr) {
+                    configAvailability += "<option value='"+availArr[key2]+"'>"+availArr[key2]+"</option>";
+                }
+                $('#availability').html(configAvailability);
+
+            }else {
+                if($('#availability').html().trim() == '')
+                    $('#availability').html("<option>No Values Available</option>");
             }
-            $('#availability').html(configAvailability);
 
-        }else {
-            $('#availability').html("<option>No Values Available</option>");
-        }
+            if(getConfigData[0].techConfig != undefined && getConfigData[0].techConfig != "") {
+                var techArr = getConfigData[0].techConfig.split(',');
 
+                for (var key3 in techArr) {
+                    configTechnology += "<option value='"+techArr[key3]+"'>"+techArr[key3]+"</option>";
+                }
+                $('#technology').html(configTechnology);
 
-        if(getConfigData[0].technology != undefined) {
-            var techArr = getConfigData[0].technology.split(',');
-
-            for (var key3 in techArr) {
-                configTechnology += "<option value='"+techArr[key3]+"'>"+techArr[key3]+"</option>";
+            }else {
+                if($('#technology').html().trim() == '')
+                    $('#technology').html("<option>No Values Available</option>");
             }
-            $('#technology').html(configTechnology);
 
-        }else {
-            $('#availability').html("<option>No Values Available</option>");
-        }
-
-
-        if(getConfigData[0].manager != undefined) {
-            var managerArr = getConfigData[0].manager.split(',');
+            if(getConfigData[0].NYMgrConfig != undefined && getConfigData[0].NYMgrConfig != "") {
+                var managerArr = getConfigData[0].NYMgrConfig.split(',');
             
-            for (var key3 in managerArr) {
-                configManager += "<option value='"+managerArr[key3]+"'>"+managerArr[key3]+"</option>";
+                for (var key3 in managerArr) {
+                    configManager += "<option value='"+managerArr[key3]+"'>"+managerArr[key3]+"</option>";
+                }
+                
+                $('#NYMgr').html(configManager);
+
+            }else {
+                if($('#NYMgr').html().trim() == '')
+                    $('#NYMgr').html("<option>No Values Available</option>");
             }
-            $('#technology').html(configManager);
 
-        }else {
-            $('#availability').html("<option>No Values Available</option>");
-        }
-
-
-        if(getConfigData[0].title != undefined) {
-            var titleArr = getConfigData[0].title.split(',');
+            if(getConfigData[0].titleConfig != undefined && getConfigData[0].titleConfig != "") {
+                var titleArr = getConfigData[0].titleConfig.split(',');
             
-            for (var key3 in titleArr) {
-                configTitle += "<option value='"+titleArr[key3]+"'>"+titleArr[key3]+"</option>";
+                for (var key3 in titleArr) {
+                    configTitle += "<option value='"+titleArr[key3]+"'>"+titleArr[key3]+"</option>";
+                }
+                $('#title').html(configTitle);
+
+            }else {
+                if($('#title').html().trim() == '')
+                    $('#title').html("<option>No Values Available</option>");
             }
-            $('#technology').html(configTitle);
 
-        }else {
-            $('#availability').html("<option>No Values Available</option>");
-        }
-
+        //}
 
         $('#addSkillsButton').on('click', function() {
             
@@ -326,18 +331,6 @@
        $('#workday').val(WD).attr('value',WD);
        $('#greenhouse').val(GH).attr('value',GH);
     }
-
-    // function closePopUp(e) {
-    //     $(e).parents('.openPositionsReport').hide();
-    // }
-
-    // function closePopUpSkill(e) {
-    //     $(e).parents('.NScontainer').hide();
-    // }
-
-    // function generateReport() {
-    //     $('.openPositionsReport').show().goTo();
-    // }
 
 </script>
 </body>

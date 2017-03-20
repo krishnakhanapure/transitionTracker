@@ -59,7 +59,7 @@ mongoose.Promise = global.Promise;
 app.get('/tt/mainDashboard', /*authenticate.checkIfLoggedIn,*/function(req, res) {
 
   /*hardcoded user object - to be initialized later with req.session.passport*/
-  loggedInUser = "brian_reiss@timeinc.com";
+  loggedInUser = "krishna.khanapure@timeinc.com";
   //var loggedInUser = req.session.passport.user.email;
 
   mongoose.connect('mongodb://localhost:27017/interviewTracker')
@@ -96,7 +96,7 @@ function displayForm(req, res) {
     MongoClient.connect("mongodb://localhost:27017/interviewTracker", function(err, db1) {
           if(!err) {
 
-            var totalFilled = 0, backFill = 0, totalOffered = 0, totalOpenPositions = 0, tableData = 0, tableData2 = 0, techClickData = 0, secLevelData = 0, totalPositionsOffered = 0;
+            var totalFilled = 0, backFill = 0, totalOffered = 0, totalOpenPositions = 0, tableData = 0, tableData2 = 0, techClickData = 0, secLevelData = 0, totalPositionsOffered = 0, totalPositionsOffered2 = 0;
 
             db1.collection('configurationDetails').find().toArray(function (findErr, aum3) {
                 configJSON = JSON.stringify(aum3);
@@ -127,10 +127,10 @@ function displayForm(req, res) {
                 db1.close();
             });
 
-            db1.collection('VendorCandidateMap').aggregate({
+            db1.collection('candidatesOfferedLetter').aggregate({
               $group : {
-                        _id : "$candidateTechnology", 
-                        manager : {$addToSet : "$VpName"},
+                        "_id" : { "tech":"$technology", 
+                        "manager": "$canVPName"},
                         totalOffered:  {
                             $sum : 1, 
                         }
@@ -144,6 +144,27 @@ function displayForm(req, res) {
                 }else {
 
                   totalPositionsOffered = JSON.stringify(countres);
+                }
+
+                db1.close();
+            });
+
+            db1.collection('candidatesOfferedLetter').aggregate({
+              $group: {
+                _id : "$technology",
+                totalOffered:  {
+                    $sum : 1
+                }
+              }
+            }, function(err, countres) {
+              if (err) return console.log(err)
+
+
+                if(countres.length == 0) {
+                  totalPositionsOffered2 = 0;
+                }else {
+
+                  totalPositionsOffered2 = JSON.stringify(countres);
                 }
 
                 db1.close();
@@ -259,7 +280,7 @@ function displayForm(req, res) {
 
                   totalFilled = totalYes;
 
-                  var finalPageDisplay = "<script> var userDetails = '"+userDetails+"'; var totalPositionsOffered = '"+totalPositionsOffered+"'; var openTitlePositions='"+openTitlePositions+"'; var secLevelData = '"+secLevelData+"'; var techClickData = '"+techClickData+"'; var tableData2 = '"+tableData2+"'; var tableData = '"+tableData+"'; var totalOpenPositions = '"+totalOpenPositions+"'; var totalCountDisplay = '"+totalFilled+"';</script>"+data;
+                  var finalPageDisplay = "<script> var userDetails = '"+userDetails+"'; var totalPositionsOffered = '"+totalPositionsOffered+"';var totalPositionsOffered2 = '"+totalPositionsOffered2+"'; var openTitlePositions='"+openTitlePositions+"'; var secLevelData = '"+secLevelData+"'; var techClickData = '"+techClickData+"'; var tableData2 = '"+tableData2+"'; var tableData = '"+tableData+"'; var totalOpenPositions = '"+totalOpenPositions+"'; var totalCountDisplay = '"+totalFilled+"';</script>"+data;
                   res.write(finalPageDisplay);
                   res.end();
                 });
@@ -466,7 +487,7 @@ function processAllFieldsOfTheForm(req, res) {
               if(DBName == 'login') {
                 db.collection( 'login' ).update (
                     {_id: new ObjectID(idString)},
-                    { $set : { role:fields.newUserRole, email:fields.newUserEmail, name:fields.newUserName } },
+                    { $set : { role:fields.newUserRole, email:fields.newUserEmail, name:fields.newUserName} },
                     function( err, result ) {
                         if ( err ) {
                           console.log("Error in updating");
@@ -505,11 +526,19 @@ function processAllFieldsOfTheForm(req, res) {
 
               console.log('/tt/adminConfigure');
 
-                fs.readFile('configurationPage.html', function (err, data) {
+                db.collection('configurationDetails').find().toArray(function (findErr, aum) {
+                
+                  aumStr = JSON.stringify(aum);
+                  fs.readFile('configurationPage.html', function (err, data) {
                   
-                  res.write(data);
-                  res.end();
+                    var dataToSend = "<script>var configData = '"+aumStr+"'</script>"+data;
+                    res.write(dataToSend);
+                    res.end();
 
+                  });
+
+                  db.close();
+              
                 });
             }
 
@@ -538,15 +567,55 @@ function processAllFieldsOfTheForm(req, res) {
                 });
             }
             else if(req.params.action === 'updateConfig') {
-              var techTitleArrJSON = 0;
-              
-              db.collection('configurationDetails').find().toArray(function (findErr, aum) {
-                
-                aumStr = aum;
-                db.close();
-            
-              });
+              console.log('into /updateConfig');
+
+              var DBName = fields.collectionName;
+
+              var ObjectID = require('mongodb').ObjectID;
+              var idString = fields.rowID;
+
+              if(idString == '0') {
+                  db.collection('configurationDetails').insert(fields, function(insError, insRecord) {
+                    if(insError) {
+                      console.log("inside insError");
+
+                    }else {
+                      fs.readFile('redirectAfterSave.html', function (err, data) {
+
+                        var datatoSend = "<script>var actionSent = 'adminConfigure';</script>"+data;
+
+                        res.write(datatoSend);
+                        res.end();
+                      });
+
+                      db.close();
+
+                    }
+                  });
+
+              }else {
+                  db.collection( 'configurationDetails' ).update (
+                    {_id: new ObjectID(idString)},
+                    { $set : { titleConfig:fields.titleConfig, techConfig:fields.techConfig, NYMgrConfig:fields.NYMgrConfig, vendorConfig:fields.vendorConfig, availConfig:fields.availConfig, OfMgrConfig:fields.OfMgrConfig} },
+                    function( err, result ) {
+                        if ( err ) {
+                          console.log("Error in updating");
+
+                        } else {
+                            fs.readFile('redirectAfterSave.html', function (err, data) {
+                                var datatoSend = "<script>var actionSent = 'adminConfigure';</script>"+data;
+
+                                res.write(datatoSend);
+                                res.end();
+                              });
+
+                              db.close();
+
+                            }
+                    });
+              }
             }
+
             else if(req.params.action === 'updateUser') {
 
               db.collection('login').insert(fields, function(insError, insRecord) {
@@ -592,7 +661,7 @@ function processAllFieldsOfTheForm(req, res) {
 
                 fs.readFile('uploadVendor.html', function (err, data) {
 
-                  var dataToSend = "<script>var vendorJSONData = '"+venStaffDataJSON+"'; var mapReportList = '"+mapReportList+"'; var JSONData = '"+JSON.stringify(aumStr)+"'; var managerConfig = '"+configJSON+"'; var configJSON = '"+configJSON+"';</script>"+data;
+                  var dataToSend = "<script>var vendorJSONData = '"+venStaffDataJSON+"'; var mapReportList = '"+mapReportList+"'; var JSONData = '"+JSON.stringify(aumStr)+"'; var configJSON = '"+configJSON+"';</script>"+data;
                  
                   res.write(dataToSend);
 

@@ -157,7 +157,6 @@
         var getConfigData = JSON.parse(configJSON);
         jsonToParse = JSON.parse(JSONData);
         mapReportListJSON = JSON.parse(mapReportList);
-        managerConfigJSON = JSON.parse(managerConfig);
 
         var configTechnology = '<option value="" selected="selected">please select a Technology</option>';
         var configVendor = '<option value="" selected="selected">please select a Vendor</option>';
@@ -166,28 +165,65 @@
 
             $(document).ready(function() {
 
-                    for (var key2 in getConfigData.technology) {
-                        configTechnology += "<option value='"+getConfigData.technology[key2]+"'>"+getConfigData.technology[key2]+"</option>";
+                    if(getConfigData[0].techConfig != undefined && getConfigData[0].techConfig != "") {
+                            var techArr = getConfigData[0].techConfig.split(',');
+
+                            for (var key3 in techArr) {
+                                configTechnology += "<option value='"+techArr[key3]+"'>"+techArr[key3]+"</option>";
+                            }
+                            $('#technology').html(configTechnology);
+
+                        }else {
+                            if($('#technology').html().trim() == '')
+                                $('#technology').html("<option>No Values Available</option>");
                     }
-                    $('#technology').html(configTechnology);
 
 
+                    if(getConfigData[0].vendorConfig != undefined && getConfigData[0].vendorConfig != "") {
+                            var vendorArr = getConfigData[0].vendorConfig.split(',');
 
-                    for (var key3 in getConfigData.vendorName) {
-                        configVendor += "<option value='"+getConfigData.vendorName[key3]+"'>"+getConfigData.vendorName[key3]+"</option>";
+                            for (var key3 in vendorArr) {
+                                configVendor += "<option value='"+vendorArr[key3]+"'>"+vendorArr[key3]+"</option>";
+                            }
+                            $('#vendorName').html(configVendor);
+
+                        }else {
+                            if($('#vendorName').html().trim() == '')
+                                $('#vendorName').html("<option>No Values Available</option>");
                     }
-                    $('#vendorName').html(configVendor);
 
+                    // for (var key4 in getConfigData.manager) {
+                    //     configManager += "<option value='"+getConfigData.manager[key4]+"'>"+getConfigData.manager[key4]+"</option>";
+                    // }
+                    // $('#vendorVpName').html(configManager);
 
-                    for (var key4 in getConfigData.manager) {
-                        configManager += "<option value='"+getConfigData.manager[key4]+"'>"+getConfigData.manager[key4]+"</option>";
+                    if(getConfigData[0].NYMgrConfig != undefined && getConfigData[0].NYMgrConfig != "") {
+                            var VPArr = getConfigData[0].NYMgrConfig.split(',');
+
+                            for (var key3 in VPArr) {
+                                configManager += "<option value='"+VPArr[key3]+"'>"+VPArr[key3]+"</option>";
+                            }
+                            $('#vendorVpName').html(configManager);
+                            $('#VpName').html(configManager);
+
+                        }else {
+                            if($('#vendorVpName').html().trim() == '')
+                                $('#vendorVpName').html("<option>No Values Available</option>");
                     }
-                    $('#vendorVpName').html(configManager);
 
-                    for (var key5 in getConfigData.offshoremanager) {
-                        configoffshoreManager += "<option value='"+getConfigData.offshoremanager[key5]+"'>"+getConfigData.offshoremanager[key5]+"</option>";
+                    if(getConfigData[0].OfMgrConfig != undefined && getConfigData[0].OfMgrConfig != "") {
+                            var offshoreMgrArr = getConfigData[0].OfMgrConfig.split(',');
+
+                            for (var key3 in offshoreMgrArr) {
+                                configoffshoreManager += "<option value='"+offshoreMgrArr[key3]+"'>"+offshoreMgrArr[key3]+"</option>";
+                            }
+                            $('#offshoreMgr').html(configoffshoreManager);
+
+                        }else {
+                            if($('#offshoreMgr').html().trim() == '')
+                                $('#offshoreMgr').html("<option>No Values Available</option>");
                     }
-                    $('#offshoreMgr').html(configoffshoreManager);
+
 
                     var optionsList = '';
                     var managerList = '<option value="" selected="selected">please select a Name</option>';
@@ -219,12 +255,12 @@
                     $('#candidateList').html(optionsList);
 
 
-                    for (var key3 in managerConfigJSON.manager) {
-                        managerList += '<option value="'+managerConfigJSON.manager[key3]+'">'+managerConfigJSON.manager[key3]+'</option>';
+                    // for (var key3 in managerConfigJSON.manager) {
+                    //     managerList += '<option value="'+managerConfigJSON.manager[key3]+'">'+managerConfigJSON.manager[key3]+'</option>';
 
-                    }
+                    // }
 
-                    $('#VpName').html(managerList);
+                    // $('#VpName').html(managerList);
                         
             });
 

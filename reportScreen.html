@@ -231,13 +231,13 @@
 
                 if(mapReportListJSON[key2].backfillPosition == "Yes") {
 
-                    data5 += "<td>"+mapReportListJSON[key2].candidateList+"</td><td>"+mapReportListJSON[key2].candidateTechnology+"</td><td>"+mapReportListJSON[key2].candidateTitle+"</td><td>"+mapReportListJSON[key2].candidateDOJ+"</td><td>"+mapReportListJSON[key2].vendorStaff+"</td><td>"+mapReportListJSON[key2].VpName+"</td><td>"+mapReportListJSON[key2].offshoreMgr+"</td><td for="+mapReportListJSON[key3]._id+"><a id='canVendorMap' title='Edit Row' data-toggle='modal' data-target='#updateFormSection' class='edit-link glyphicon glyphicon-pencil'>&nbsp;</a></td>";
+                    data5 += "<td>"+mapReportListJSON[key2].candidateList+"</td><td>"+mapReportListJSON[key2].candidateTechnology+"</td><td>"+mapReportListJSON[key2].candidateTitle+"</td><td>"+mapReportListJSON[key2].candidateDOJ+"</td><td>"+mapReportListJSON[key2].vendorStaff+"</td><td>"+mapReportListJSON[key2].VpName+"</td><td>"+mapReportListJSON[key2].offshoreMgr+"</td>";
 
                     data5 += "</tr><tr>";
 
                 }else {
 
-                    data6 += "<td>"+mapReportListJSON[key2].candidateList+"</td><td>"+mapReportListJSON[key2].candidateTechnology+"</td><td>"+mapReportListJSON[key2].candidateTitle+"</td><td>"+mapReportListJSON[key2].candidateDOJ+"</td><td>"+mapReportListJSON[key2].vendorStaff+"</td><td>"+mapReportListJSON[key2].VpName+"</td><td>"+mapReportListJSON[key2].offshoreMgr+"</td><td for="+mapReportListJSON[key3]._id+"><a id='canVendorMap' title='Edit Row' data-toggle='modal' data-target='#updateFormSection' class='edit-link glyphicon glyphicon-pencil'>&nbsp;</a></td>";
+                    data6 += "<td>"+mapReportListJSON[key2].candidateList+"</td><td>"+mapReportListJSON[key2].candidateTechnology+"</td><td>"+mapReportListJSON[key2].candidateTitle+"</td><td>"+mapReportListJSON[key2].candidateDOJ+"</td><td>"+mapReportListJSON[key2].vendorStaff+"</td><td>"+mapReportListJSON[key2].VpName+"</td><td>"+mapReportListJSON[key2].offshoreMgr+"</td>";
 
                     data6 += "</tr><tr>";
 
@@ -261,6 +261,11 @@
 
             $('.edit-link').on('click', function() {
                 if($(this).attr('id') == "login") {
+
+                    $('.update-section').hide();
+                    $('.edit-section').html('').append($('.update-section').html());
+                    $('.edit-section .update-section').attr('id', "userUpdate");
+
                     $('#newUserName').val($($(this).parent().siblings()[0]).text());
                     $('#newUserRole option[value="'+$($(this).parent().siblings()[2]).text()+'"]').attr('selected','selected');
                     $('#newUserEmail').val($($(this).parent().siblings()[1]).text());
@@ -268,8 +273,7 @@
                     var id = $(this).parent().attr('for');
                     $('#rowID').val(id).attr('value',id);
                     $('#collectionName').val('login').attr('value','login');
-
-                    $('.update-section').hide();
+                    
                     $('#userUpdate').show();
 
                 }else if($(this).attr('id') == "canVendorMap") {
@@ -314,117 +318,7 @@
 
                         <h4 class="modal-title">Please add the data to Update:</h4>
                     </div>
-                    <div class="modal-body">
-                        <fieldset class="form-content update-section" id="userUpdate">
-                 
-                            <!-- Title  input-->
-                            <div class="control-group">
-                                <label class="control-label">Add User Name:</label>
-                                <div class="controls">
-                                    <input id="newUserName" name="newUserName" type="text" placeholder="User Name"
-                                    class="input-xlarge form-control" />
-                                </div>
-                            </div>
-
-                            <!-- Manager input-->
-                            <div class="control-group">
-                                <label class="control-label">Add User Role:</label>
-                                <div class="controls">
-                                    <select id="newUserRole" name="newUserRole" class="input-xlarge form-control">
-                                          <option value="">Please Select a Role</option>
-                                          <option value="superadmin">Super Admin</option>
-                                          <option value="admin">Admin</option>
-                                          <option value="hr">HR</option>
-                                          <option value="user">User</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- Candidate Name input-->
-                            <div class="control-group">
-                                <label class="control-label">Add User Email:</label>
-                                <div class="controls">
-                                    <input id="newUserEmail" name="newUserEmail" type="email" placeholder="User Email"
-                                    class="input-xlarge form-control" />
-                                </div>
-                            </div>
-
-                        </fieldset>
-
-                        <fieldset class="form-content" style="display:none">
-                            <!-- Address form -->
-                     
-                            <!-- Candidate Name input-->
-                            <div class="control-group">
-                                <label class="control-label">Candidate Name:</label>
-                                <div class="controls">
-                                   <input id="newName" name="newName" type="text" placeholder=" Name" class="input-xlarge form-control" />
-                                </div>
-                            </div>
-
-                            <!-- Candidate Name input-->
-                            <div class="control-group">
-                                <label class="control-label">Candidate Title:</label>
-                                <div class="controls">
-                                   <input id="newTitle" name="newTitle" type="text" placeholder=" Title" class="input-xlarge form-control" />
-                                </div>
-                            </div>
-
-                            <!-- Candidate Name input-->
-                            <div class="control-group">
-                                <label class="control-label">Candidate Technology:</label>
-                                <div class="controls">
-                                   <input id="newTechnology" name="newTechnology" type="text" placeholder="Technology" class="input-xlarge form-control" />
-                                </div>
-                            </div>
-
-                            <!-- Candidate Name input-->
-                            <div class="control-group">
-                                <label class="control-label">Candidate DOJ:</label>
-                                <div class="controls">
-                                   <input id="newdate" name="" type="date" class="input-xlarge form-control" />
-                                </div>
-                            </div>
-
-                            
-                            <!-- NY input-->
-                             <div class="control-group">
-                                <label class="control-label ">VP Name:</label>
-                                <div class="controls">
-                                    <select required id="VpName" name="VpName" class="form-control input-xlarge" onchange="populateVendor(this.value);">
-                                    
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- Vendor Staff input-->
-                            <div class="control-group">
-                                <label class="control-label">Vendor Staff:</label>
-                                <div class="controls">
-                                    <select required id="vendorStaff" name="vendorStaff" class="input-xlarge form-control">
-                                    </select>
-                                </div>
-                            </div>
-
-                            <!-- NY input-->
-                             <div class="control-group ">
-                                <label class="control-label">Offshore Manager:</label>
-                                <div class="controls">
-                                    <select required id="offshoreMgr" name="offshoreMgr" class="input-xlarge form-control">
-                                        
-                                    </select>
-                                </div>
-                            </div>
-
-
-                            <!--  Backfill position input-->
-                            <div class="control-group">
-                                <label class="control-label"></label>
-                                <div class="controls">
-                                    <input class="btn" type="checkbox" name="backfillPosition" id="backfillPosition" value="Yes" /> Moved out of vendor transition
-                                </div>
-                            </div>
-                        </fieldset>
+                    <div class="modal-body edit-section">
 
                     </div>
                     <div class="modal-footer">
@@ -614,6 +508,117 @@
 
         </div>
     </div>
+
+    <fieldset class="form-content" style="display:none" id="CanVendorMapUpdate">
+        <!-- Address form -->
+
+        <!-- Candidate Name input-->
+        <div class="control-group">
+            <label class="control-label">Candidate Name:</label>
+            <div class="controls">
+               <input id="newName" name="newName" type="text" placeholder=" Name" class="input-xlarge form-control" />
+            </div>
+        </div>
+
+        <!-- Candidate Name input-->
+        <div class="control-group">
+            <label class="control-label">Candidate Title:</label>
+            <div class="controls">
+               <input id="newTitle" name="newTitle" type="text" placeholder=" Title" class="input-xlarge form-control" />
+            </div>
+        </div>
+
+        <!-- Candidate Name input-->
+        <div class="control-group">
+            <label class="control-label">Candidate Technology:</label>
+            <div class="controls">
+               <input id="newTechnology" name="newTechnology" type="text" placeholder="Technology" class="input-xlarge form-control" />
+            </div>
+        </div>
+
+        <!-- Candidate Name input-->
+        <div class="control-group">
+            <label class="control-label">Candidate DOJ:</label>
+            <div class="controls">
+               <input id="newdate" name="" type="date" class="input-xlarge form-control" />
+            </div>
+        </div>
+
+        
+        <!-- NY input-->
+         <div class="control-group">
+            <label class="control-label ">VP Name:</label>
+            <div class="controls">
+                <select required id="VpName" name="VpName" class="form-control input-xlarge">
+                
+                </select>
+            </div>
+        </div>
+
+        <!-- Vendor Staff input-->
+        <div class="control-group">
+            <label class="control-label">Vendor Staff:</label>
+            <div class="controls">
+                <select required id="vendorStaff" name="vendorStaff" class="input-xlarge form-control">
+                </select>
+            </div>
+        </div>
+
+        <!-- NY input-->
+         <div class="control-group ">
+            <label class="control-label">Offshore Manager:</label>
+            <div class="controls">
+                <select required id="offshoreMgr" name="offshoreMgr" class="input-xlarge form-control">
+                    
+                </select>
+            </div>
+        </div>
+
+
+        <!--  Backfill position input-->
+        <div class="control-group">
+            <label class="control-label"></label>
+            <div class="controls">
+                <input class="btn" type="checkbox" name="backfillPosition" id="backfillPosition" value="Yes" /> Moved out of vendor transition
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="form-content update-section" id=""  style="display:none">
+                 
+        <!-- Title  input-->
+        <div class="control-group">
+            <label class="control-label">Add User Name:</label>
+            <div class="controls">
+                <input id="newUserName" name="newUserName" type="text" placeholder="User Name"
+                class="input-xlarge form-control" />
+            </div>
+        </div>
+
+        <!-- Manager input-->
+        <div class="control-group">
+            <label class="control-label">Add User Role:</label>
+            <div class="controls">
+                <select id="newUserRole" name="newUserRole" class="input-xlarge form-control">
+                      <option value="">Please Select a Role</option>
+                      <option value="superadmin">Super Admin</option>
+                      <option value="admin">Admin</option>
+                      <option value="hr">HR</option>
+                      <option value="user">User</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Candidate Name input-->
+        <div class="control-group">
+            <label class="control-label">Add User Email:</label>
+            <div class="controls">
+                <input id="newUserEmail" name="newUserEmail" type="email" placeholder="User Email"
+                class="input-xlarge form-control" />
+            </div>
+        </div>
+
+    </fieldset>
 
 </body>
 </HTML>
