@@ -360,65 +360,67 @@
         var configAvailability = "", configTechnology = "", configManager = "", configTitle = "", offShrMgrConfig = "", vendorArrConfig = "";
 
         
-            if(getConfigData[0].availConfig != undefined && getConfigData[0].availConfig != "") {
-                var availArr = getConfigData[0].availConfig.split(',');
+            if(getConfigData[0]) {
+                if(getConfigData[0].availConfig != undefined && getConfigData[0].availConfig != "") {
+                    var availArr = getConfigData[0].availConfig.split(',');
 
-                for (var key2 in availArr) {
-                    configAvailability += "<span class='data-set'>"+availArr[key2]+"<span class='glyphicon glyphicon-remove-circle'></span></span>";
+                    for (var key2 in availArr) {
+                        configAvailability += "<span class='data-set'>"+availArr[key2]+"<span class='glyphicon glyphicon-remove-circle'></span></span>";
+                    }
+                    $('#availability').html(configAvailability);
+
                 }
-                $('#availability').html(configAvailability);
 
-            }
+                if(getConfigData[0].techConfig != undefined && getConfigData[0].techConfig != "") {
+                    var techArr = getConfigData[0].techConfig.split(',');
 
-            if(getConfigData[0].techConfig != undefined && getConfigData[0].techConfig != "") {
-                var techArr = getConfigData[0].techConfig.split(',');
+                    for (var key3 in techArr) {
+                        configTechnology += "<span class='data-set'>"+techArr[key3]+"<span class='glyphicon glyphicon-remove-circle'></span></span>";
+                    }
+                    $('#technology').html(configTechnology);
 
-                for (var key3 in techArr) {
-                    configTechnology += "<span class='data-set'>"+techArr[key3]+"<span class='glyphicon glyphicon-remove-circle'></span></span>";
                 }
-                $('#technology').html(configTechnology);
 
-            }
-
-            if(getConfigData[0].NYMgrConfig != undefined && getConfigData[0].NYMgrConfig != "") {
-                var managerArr = getConfigData[0].NYMgrConfig.split(',');
-            
-                for (var key3 in managerArr) {
-                    configManager += "<span class='data-set'>"+managerArr[key3]+"<span class='glyphicon glyphicon-remove-circle'></span></span>";
-                }
+                if(getConfigData[0].NYMgrConfig != undefined && getConfigData[0].NYMgrConfig != "") {
+                    var managerArr = getConfigData[0].NYMgrConfig.split(',');
                 
-                $('#NYMgr').html(configManager);
+                    for (var key3 in managerArr) {
+                        configManager += "<span class='data-set'>"+managerArr[key3]+"<span class='glyphicon glyphicon-remove-circle'></span></span>";
+                    }
+                    
+                    $('#NYMgr').html(configManager);
 
-            }
-
-            if(getConfigData[0].vendorConfig != undefined && getConfigData[0].vendorConfig != "") {
-                var vendorArr = getConfigData[0].vendorConfig.split(',');
-            
-                for (var key3 in vendorArr) {
-                    vendorArrConfig += "<span class='data-set'>"+vendorArr[key3]+"<span class='glyphicon glyphicon-remove-circle'></span></span>";
                 }
-                $('#vendor').html(vendorArrConfig);
 
-            }
+                if(getConfigData[0].vendorConfig != undefined && getConfigData[0].vendorConfig != "") {
+                    var vendorArr = getConfigData[0].vendorConfig.split(',');
+                
+                    for (var key3 in vendorArr) {
+                        vendorArrConfig += "<span class='data-set'>"+vendorArr[key3]+"<span class='glyphicon glyphicon-remove-circle'></span></span>";
+                    }
+                    $('#vendor').html(vendorArrConfig);
 
-            if(getConfigData[0].titleConfig != undefined && getConfigData[0].titleConfig != "") {
-                var titleArr = getConfigData[0].titleConfig.split(',');
-            
-                for (var key3 in titleArr) {
-                    configTitle += "<span class='data-set'>"+titleArr[key3]+"<span class='glyphicon glyphicon-remove-circle'></span></span>";
                 }
-                $('#title').html(configTitle);
 
-            }
+                if(getConfigData[0].titleConfig != undefined && getConfigData[0].titleConfig != "") {
+                    var titleArr = getConfigData[0].titleConfig.split(',');
+                
+                    for (var key3 in titleArr) {
+                        configTitle += "<span class='data-set'>"+titleArr[key3]+"<span class='glyphicon glyphicon-remove-circle'></span></span>";
+                    }
+                    $('#title').html(configTitle);
 
-            if(getConfigData[0].OfMgrConfig != undefined && getConfigData[0].OfMgrConfig != "") {
-                var offShrMgrArr = getConfigData[0].OfMgrConfig.split(',');
-            
-                for (var key3 in titleArr) {
-                    offShrMgrConfig += "<span class='data-set'>"+offShrMgrArr[key3]+"<span class='glyphicon glyphicon-remove-circle'></span></span>";
                 }
-                $('#offshoreManager').html(offShrMgrConfig);
 
+                if(getConfigData[0].OfMgrConfig != undefined && getConfigData[0].OfMgrConfig != "") {
+                    var offShrMgrArr = getConfigData[0].OfMgrConfig.split(',');
+                
+                    for (var key3 in offShrMgrArr) {
+                        offShrMgrConfig += "<span class='data-set'>"+offShrMgrArr[key3]+"<span class='glyphicon glyphicon-remove-circle'></span></span>";
+                    }
+                    $('#offshoreManager').html(offShrMgrConfig);
+
+                }
             }
 
         
